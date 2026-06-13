@@ -1,0 +1,19 @@
+rateLimits:
+  notes: >-
+    Innago does not publicly document specific rate limits for its REST API.
+    The API uses a combination of Bearer token (Authorization header) and
+    API key (x-api-key header) authentication. Developers should contact
+    Innago support at support@innago.com or consult the API documentation
+    at https://docs.innago.com/ for current rate limit guidance.
+  contact: https://innago.com/contact/
+  documentation: https://docs.innago.com/
+  authentication:
+    - type: BearerToken
+      header: Authorization
+      description: JWT Bearer token obtained via Auth0 authentication
+    - type: APIKey
+      header: x-api-key
+      description: API key token provided by Innago for integration access
+  baseURL: https://api-my.innago.com/openapi/v1
+  version: v1
+  limits: []

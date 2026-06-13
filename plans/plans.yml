@@ -1,0 +1,45 @@
+plans:
+  - name: Free
+    description: >-
+      Innago is 100% free for landlords and property managers. The core platform
+      includes rent collection, lease management, tenant screening, maintenance
+      requests, invoicing, and API access with no monthly fees, setup fees, or
+      contracts required.
+    url: https://innago.com/pricing/
+    price: 0
+    currency: USD
+    unit: month
+    features:
+      - Rent collection online
+      - Lease management
+      - Tenant screening
+      - Maintenance request tracking
+      - Invoicing and payment records
+      - Tenant communication
+      - REST API access (Bearer token + API key)
+      - Property and unit management
+      - Expense tracking
+      - Tenant portal
+      - E-signatures
+      - Accounting reports
+      - Multi-property management
+    rateLimit:
+      requests: null
+      period: null
+      notes: Rate limits not publicly documented
+  - name: Pro
+    description: >-
+      Premium tier with custom pricing for larger property management operations
+      requiring additional analytics, advanced accounting, and priority support.
+      Contact Innago sales for details.
+    url: https://innago.com/pricing/
+    price: null
+    currency: USD
+    unit: month
+    contact: https://innago.com/contact/
+    features:
+      - All Free tier features
+      - Advanced analytics
+      - Priority support
+      - Custom integrations
+      - Dedicated account representative

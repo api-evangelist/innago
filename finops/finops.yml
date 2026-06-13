@@ -1,0 +1,38 @@
+finops:
+  description: >-
+    Innago's core platform is free for landlords and property managers with
+    no monthly, annual, or setup fees. The company generates revenue through
+    optional value-added services including tenant screening reports and
+    premium support tiers. API access is included in the free tier.
+  pricingURL: https://innago.com/pricing/
+  model: freemium
+  currency: USD
+  costs:
+    - name: Platform Access
+      amount: 0
+      unit: month
+      description: Core property management platform including API access is free
+    - name: Tenant Screening Reports
+      amount: null
+      unit: per report
+      description: >-
+        Optional tenant background and credit check reports; pricing varies.
+        Costs are typically passed through to applicants.
+    - name: Online Rent Collection
+      amount: 0
+      unit: transaction
+      description: >-
+        ACH bank transfers are free. Credit and debit card payments may
+        include processing fees (passed to tenant or absorbed by landlord
+        per configuration).
+    - name: Pro / Enterprise
+      amount: null
+      unit: month
+      description: >-
+        Custom pricing for larger operations requiring advanced analytics,
+        priority support, and dedicated account management. Contact sales.
+      contact: https://innago.com/contact/
+  notes: >-
+    Innago competes on a free-to-landlord model, monetizing through optional
+    services. API integrators using the platform incur no licensing cost for
+    API access on the free tier.

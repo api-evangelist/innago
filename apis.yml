@@ -1,0 +1,83 @@
+aid: innago
+name: Innago
+description: >-
+  Innago is a free property management software platform with a REST API for
+  managing leases, tenant applications, rent collection, maintenance requests,
+  invoicing, and landlord-tenant communication. The API uses Bearer token and
+  API key authentication and provides endpoints for properties, units, tenants,
+  leases, invoices, payments, expenses, and maintenance tickets.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Property Management
+  - Real Estate
+  - Leases
+  - Rent Collection
+  - Maintenance
+  - Tenants
+  - Invoicing
+  - Payments
+apis:
+  - aid: innago:innago-api
+    name: Innago API
+    description: >-
+      REST API for Innago property management platform enabling programmatic
+      access to properties, units, tenants, leases, invoices, payments,
+      expenses, and maintenance tickets.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.innago.com/
+    baseURL: https://api-my.innago.com/openapi/v1
+    tags:
+      - Property Management
+      - Real Estate
+      - Leases
+      - Tenants
+      - Rent Collection
+      - Maintenance
+      - Invoicing
+      - Payments
+    properties:
+      - type: Documentation
+        url: https://docs.innago.com/
+      - type: OpenAPI
+        url: https://docs.innago.com/llms.txt
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Innago Support
+        url: https://innago.com/contact/
+        email: support@innago.com
+common:
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+  - type: Pricing
+    url: https://innago.com/pricing/
+  - type: Blog
+    url: https://innago.com/blog/
+  - type: Login
+    url: https://auth.innago.com/login
+  - type: SignUp
+    url: https://innago.com/get-started/
+  - type: TermsOfService
+    url: https://auth.innago.com/termsandcondition
+  - type: PrivacyPolicy
+    url: https://auth.innago.com/privacypolicy
+  - type: Integrations
+    url: https://innago.com/integrations/
+  - type: Features
+    url: https://innago.com/features/
+maintainers:
+  - FN: Kin Lane
+    url: https://apievangelist.com
+    email: kin@apievangelist.com
