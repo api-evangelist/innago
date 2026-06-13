@@ -1,0 +1,80 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "innago": "https://innago.com/vocab#",
+    "api": "https://api-my.innago.com/openapi/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "WebAPI",
+  "@id": "https://api-my.innago.com/openapi",
+  "name": "Innago API",
+  "description": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets.",
+  "url": "https://docs.innago.com/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Innago",
+    "url": "https://innago.com",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "support@innago.com",
+      "url": "https://innago.com/contact/"
+    }
+  },
+  "termsOfService": "https://auth.innago.com/termsandcondition",
+  "documentation": "https://docs.innago.com/",
+  "license": "https://auth.innago.com/privacypolicy",
+  "additionalType": "https://innago.com/features/",
+  "potentialAction": [
+    {
+      "@type": "Action",
+      "name": "listProperties",
+      "description": "Get all properties for the authenticated property owner",
+      "target": "https://api-my.innago.com/openapi/v1/properties"
+    },
+    {
+      "@type": "Action",
+      "name": "listLeases",
+      "description": "Get all leases by propertyId or unitId",
+      "target": "https://api-my.innago.com/openapi/v1/leases"
+    },
+    {
+      "@type": "Action",
+      "name": "listTenants",
+      "description": "Get all tenants for a lease",
+      "target": "https://api-my.innago.com/openapi/v1/tenants"
+    },
+    {
+      "@type": "Action",
+      "name": "listInvoices",
+      "description": "Get all invoices for a lease or tenant",
+      "target": "https://api-my.innago.com/openapi/v1/invoices"
+    },
+    {
+      "@type": "Action",
+      "name": "listPayments",
+      "description": "Get all payments based on filter criteria",
+      "target": "https://api-my.innago.com/openapi/v1/payments"
+    },
+    {
+      "@type": "Action",
+      "name": "listExpenses",
+      "description": "Get all expenses for the property owner",
+      "target": "https://api-my.innago.com/openapi/v1/expenses"
+    },
+    {
+      "@type": "Action",
+      "name": "listMaintenances",
+      "description": "Get all maintenance tickets based on filters",
+      "target": "https://api-my.innago.com/openapi/v2/maintenances"
+    }
+  ],
+  "category": [
+    "Property Management",
+    "Real Estate",
+    "Rent Collection",
+    "Tenant Management",
+    "Maintenance Tracking",
+    "Invoicing",
+    "Payments"
+  ]
+}

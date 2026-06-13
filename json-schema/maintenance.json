@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-my.innago.com/openapi/schemas/maintenance",
+  "title": "MaintenanceTicket",
+  "description": "A maintenance ticket submitted for a property within the Innago platform",
+  "type": "object",
+  "properties": {
+    "maintenanceUid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique maintenance ticket identifier"
+    },
+    "personName": {
+      "type": "string",
+      "description": "Name of the person who submitted the ticket"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the maintenance ticket"
+    },
+    "category": {
+      "type": "string",
+      "description": "Maintenance category",
+      "enum": ["Electrical", "Plumbing", "AC", "Heat", "Kitchen", "Appliance", "Other"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the maintenance issue"
+    },
+    "dateSubmitted": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the ticket was submitted"
+    },
+    "dateResolved": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Date the ticket was resolved, if applicable"
+    },
+    "isUrgent": {
+      "type": "boolean",
+      "description": "Whether the maintenance issue is urgent"
+    },
+    "property": {
+      "type": "string",
+      "description": "Property name associated with the ticket"
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit name associated with the ticket"
+    },
+    "propertyAddress": {
+      "type": "string",
+      "description": "Address of the property"
+    },
+    "personUid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifier of the person who submitted the ticket"
+    },
+    "requestStatus": {
+      "type": "string",
+      "description": "Current status of the maintenance request",
+      "enum": ["NewRequest", "OldRequest", "Resolved", "ReOpened"]
+    }
+  }
+}

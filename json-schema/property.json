@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-my.innago.com/openapi/schemas/property",
+  "title": "Property",
+  "description": "A real estate property managed within the Innago platform",
+  "type": "object",
+  "properties": {
+    "propertyUid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique property identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Property name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Basic property details"
+    },
+    "numberOfUnits": {
+      "type": "integer",
+      "description": "Total number of units in the property"
+    },
+    "availableUnits": {
+      "type": "integer",
+      "description": "Number of vacant units"
+    },
+    "totalTenants": {
+      "type": "integer",
+      "description": "Total tenant count across property"
+    },
+    "numberOfOpenMainatainanceRequests": {
+      "type": "integer",
+      "description": "Count of open maintenance requests"
+    },
+    "propertyType": {
+      "type": "string",
+      "description": "Type classification of the property"
+    },
+    "isArchived": {
+      "type": "boolean",
+      "description": "Whether the property has been archived"
+    },
+    "address": {
+      "$ref": "#/definitions/Address"
+    },
+    "entityType": {
+      "type": "string",
+      "description": "Entity classification"
+    },
+    "propertyOwnerUid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Owner identifier"
+    }
+  },
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        "addressLine1": { "type": "string" },
+        "addressLine2": { "type": "string" },
+        "country": { "type": "string" },
+        "state": { "type": "string" },
+        "stateShortName": { "type": "string" },
+        "city": { "type": "string" },
+        "zipcode": { "type": "string" },
+        "latitude": { "type": "number", "format": "double" },
+        "longitude": { "type": "number", "format": "double" }
+      }
+    }
+  }
+}

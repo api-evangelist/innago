@@ -1,0 +1,1332 @@
+openapi: 3.0.3
+info:
+  title: Innago API
+  description: >-
+    REST API for Innago property management platform enabling programmatic
+    access to properties, units, tenants, leases, invoices, payments,
+    expenses, and maintenance tickets. Authentication uses Bearer token and
+    API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+  - url: https://api-my.innago.com/openapi
+    description: Innago production API
+security:
+  - BearerAuth: []
+    ApiKeyAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    AddressResponseModel:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        stateShortName:
+          type: string
+        city:
+          type: string
+        zipcode:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    PropertyInfoModel:
+      type: object
+      properties:
+        propertyUid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        numberOfUnits:
+          type: integer
+        availableUnits:
+          type: integer
+        totalTenants:
+          type: integer
+        numberOfOpenMainatainanceRequests:
+          type: integer
+        propertyType:
+          type: string
+        isArchived:
+          type: boolean
+        address:
+          $ref: '#/components/schemas/AddressResponseModel'
+        entityType:
+          type: string
+        propertyOwnerUid:
+          type: string
+          format: uuid
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    PropertyInfoListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            properties:
+              type: array
+              items:
+                $ref: '#/components/schemas/PropertyInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PropertyInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyUnitModel:
+      type: object
+      properties:
+        name:
+          type: string
+        propertyUnitUid:
+          type: string
+          format: uuid
+    TenantShortModel:
+      type: object
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    PropertyUnitListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            units:
+              type: array
+              items:
+                $ref: '#/components/schemas/PropertyUnitModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyUnitDetailResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            unit:
+              $ref: '#/components/schemas/PropertyUnitModel'
+            tenants:
+              type: array
+              items:
+                $ref: '#/components/schemas/TenantShortModel'
+            entityType:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    LeaseModel:
+      type: object
+      properties:
+        leaseUid:
+          type: string
+          format: uuid
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        propertyName:
+          type: string
+        propertyAddress:
+          type: string
+        propertyUnitName:
+          type: string
+        rentAmount:
+          type: number
+          format: double
+        depositAmount:
+          type: number
+          format: double
+        dueOn:
+          type: integer
+        paymentFrequency:
+          type: string
+        isActiveLease:
+          type: boolean
+        isExpiredLease:
+          type: boolean
+        isExpiringLease:
+          type: boolean
+        isFutureLease:
+          type: boolean
+        isListingArchived:
+          type: boolean
+        noOfTenants:
+          type: integer
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantShortModel'
+    LeaseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaseModel'
+            paging:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    FinalLeaseDetailModelResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+            - $ref: '#/components/schemas/LeaseModel'
+            - type: object
+              properties:
+                listingFrequency:
+                  type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    UserShortInfoModel:
+      type: object
+      properties:
+        userUid:
+          type: string
+          format: uuid
+        userFirstName:
+          type: string
+          nullable: true
+        userLastName:
+          type: string
+          nullable: true
+        userEmail:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        userRole:
+          type: string
+          nullable: true
+          description: 'PO, Tenant, Applicant, etc.'
+        entityType:
+          type: string
+          nullable: true
+          description: 'Property, PropertyUnit, Lease, Tenant, Invoice, Payment, Maintenance, or Applicant'
+    UserShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    UserShortInfoListResponseResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            userShortInfoModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    InvoiceShortInfoModel:
+      type: object
+      properties:
+        invoiceNumber:
+          type: integer
+          format: int64
+        invoiceUid:
+          type: string
+          format: uuid
+        invoiceDueDate:
+          type: string
+          format: date-time
+        invoiceStatus:
+          type: string
+          description: 'Pending, Fully Paid, Partially Paid'
+        amount:
+          type: number
+          format: double
+        entityType:
+          type: string
+    InvoiceShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InvoiceShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    InvoiceShortInfoListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            invoiceShortInfoResponseModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/InvoiceShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    CreateInvoiceModel:
+      type: object
+      required:
+        - tenantUid
+        - leaseUid
+        - amount
+        - dueDate
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        leaseUid:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        item:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+    CreateInvoiceResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            invoiceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PaymentInfoModel:
+      type: object
+      properties:
+        paymentUid:
+          type: string
+          format: uuid
+        paymentDate:
+          type: string
+          format: date-time
+        paymentMode:
+          type: string
+          description: 'online, offline'
+        paymentStatus:
+          type: string
+          description: 'Pending, Paid, Rejected, Reversed'
+        paymentCategory:
+          type: string
+          description: 'Invoice, Applicant, Reversal'
+        amount:
+          type: number
+          format: double
+        payerId:
+          type: string
+          format: uuid
+        entityType:
+          type: string
+    PaymentInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PaymentTransactionModel:
+      type: object
+      properties:
+        paymentUid:
+          type: string
+          format: uuid
+        invoiceUid:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        paidOn:
+          type: string
+          format: date-time
+        depositedOn:
+          type: string
+          format: date-time
+        paymentMode:
+          type: string
+        paymentStatus:
+          type: string
+    PaymentWithAdditionalInfoResponse:
+      type: object
+      properties:
+        propertyUid:
+          type: string
+          format: uuid
+        propertyName:
+          type: string
+        propertyUnitUid:
+          type: string
+          format: uuid
+        propertyUnitName:
+          type: string
+        tenantUid:
+          type: string
+          format: uuid
+        tenantEmail:
+          type: string
+        tenantPhone:
+          type: string
+        paymentsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTransactionModel'
+        totalPayment:
+          type: number
+          format: double
+        dueInYear:
+          type: integer
+        dueInMonth:
+          type: integer
+        leaseUid:
+          type: string
+          format: uuid
+    PaymentWithAdditionalInfoListResponseResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            paymentWithAdditionalInfoResponses:
+              type: array
+              items:
+                $ref: '#/components/schemas/PaymentWithAdditionalInfoResponse'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    RecordPaymentRequestModel:
+      type: object
+      required:
+        - tenantUid
+        - amount
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+          description: Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
+    RecordPaymentResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            paymentUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    RecordReferencePaymentRequestModel:
+      type: object
+      properties:
+        externalTenantGuid:
+          type: string
+          format: uuid
+          description: External Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    GetAllExpensesByFilterRequestModel:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        dateFrom:
+          type: string
+          format: date-time
+          nullable: true
+        dateTo:
+          type: string
+          format: date-time
+          nullable: true
+        propertyUids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        propertyUnitUids:
+          type: array
+          items:
+            type: string
+            format: uuid
+    ExpenseShortInfoModel:
+      type: object
+      properties:
+        expenseUid:
+          type: string
+          format: uuid
+        category:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date-time
+        businessEntityUid:
+          type: string
+          format: uuid
+        businessEntityName:
+          type: string
+        payeeName:
+          type: string
+        payeeEmail:
+          type: string
+        payeePhone:
+          type: string
+        payeeCategory:
+          type: string
+        amount:
+          type: number
+          format: double
+        bankName:
+          type: string
+        propertyUid:
+          type: string
+          format: uuid
+        propertyUnitUid:
+          type: string
+          format: uuid
+    ExpenseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            expenseListModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExpenseShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+            totalRecords:
+              type: integer
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    MaintenanceTicketModel:
+      type: object
+      properties:
+        maintenanceUid:
+          type: string
+          format: uuid
+        personName:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        dateSubmitted:
+          type: string
+          format: date-time
+        dateResolved:
+          type: string
+          format: date-time
+          nullable: true
+        isUrgent:
+          type: boolean
+        property:
+          type: string
+        unit:
+          type: string
+        propertyAddress:
+          type: string
+        personUid:
+          type: string
+          format: uuid
+        requestStatus:
+          type: string
+    MaintenanceListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            resolvedMaintenanceCount:
+              type: integer
+            openMaintenanceCount:
+              type: integer
+            newMaintenanceCount:
+              type: integer
+            totalRequestCount:
+              type: integer
+            maintenances:
+              type: array
+              items:
+                $ref: '#/components/schemas/MaintenanceTicketModel'
+            isMaintenanceRequestOn:
+              type: boolean
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    FileModel:
+      type: object
+      properties:
+        fileName:
+          type: string
+        fileContent:
+          type: string
+          format: byte
+    MaintenanceRequestModel:
+      type: object
+      required:
+        - maintenanceTicketName
+        - description
+        - selectedProperties
+      properties:
+        maintenanceTicketName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Name of maintenance ticket
+        description:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          description: Description of maintenance ticket
+        selectedProperties:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Properties for maintenance ticket
+        maintenanceCategory:
+          type: integer
+          enum: [1, 2, 3, 4, 5, 6, 7]
+          description: '1=Electrical, 2=Plumbing, 3=AC, 4=Heat, 5=Kitchen, 6=Appliance, 7=Other'
+        isUrgent:
+          type: boolean
+          description: Mark if maintenance ticket is urgent
+        isNotifyTenant:
+          type: boolean
+          description: Mark if tenant needs to be notified
+        selectedPropertyUnits:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Required if isNotifyTenant is true
+        tenantUid:
+          type: string
+          format: uuid
+          description: Required if maintenance ticket needs to be created on behalf of Tenant
+        files:
+          type: array
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/FileModel'
+          description: Attachments, max 10 files, 20MB each
+    CreateMaintenanceResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+            maintenanceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ExternalReferenceMappingRequest:
+      type: array
+      items:
+        type: object
+        properties:
+          entityType:
+            type: string
+            description: 'Property, PropertyUnit, Lease, Tenant'
+          entityId:
+            type: string
+            format: uuid
+          externalReferenceId:
+            type: string
+            format: uuid
+    ExternalReferenceMappingResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            mappingResults:
+              type: array
+              items:
+                type: object
+                properties:
+                  entityType:
+                    type: string
+                  entityId:
+                    type: string
+                    format: uuid
+                  externalReferenceId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                  failureReason:
+                    type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+paths:
+  /v1/health:
+    get:
+      operationId: getHealth
+      summary: Health check
+      description: Verify API availability.
+      tags:
+        - Health
+      security:
+        - BearerAuth: []
+          ApiKeyAuth: []
+      responses:
+        '200':
+          description: API is healthy
+
+  /v1/properties:
+    get:
+      operationId: listProperties
+      summary: Get all properties
+      description: Get all properties for the authenticated PO. PO identifier is fetched from token claims.
+      tags:
+        - Properties
+      parameters:
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+          description: Pagination support; defaults to 1
+      responses:
+        '200':
+          description: List of properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInfoListResponseModelResponse'
+
+  /v1/properties/{propertyUid}:
+    get:
+      operationId: getProperty
+      summary: Get property by ID
+      description: Get all properties for a PO by propertyId. PO Identifier will be fetched from the token claims.
+      tags:
+        - Properties
+      parameters:
+        - name: propertyUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for a specific property
+      responses:
+        '200':
+          description: Property details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInfoResponseModelResponse'
+
+  /v1/properties/{propertyUid}/units:
+    get:
+      operationId: listPropertyUnits
+      summary: Get all units for a property
+      description: Get all property units by propertyId.
+      tags:
+        - Properties
+      parameters:
+        - name: propertyUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The Id of the specific property
+      responses:
+        '200':
+          description: List of property units
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyUnitListResponseModelResponse'
+
+  /v1/properties/{propertyUid}/units/{unitUid}:
+    get:
+      operationId: getPropertyUnit
+      summary: Get details of a specific unit
+      description: Get details of a specific unit under a property.
+      tags:
+        - Properties
+      parameters:
+        - name: propertyUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: unitUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Property unit details including tenants
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyUnitDetailResponseModelResponse'
+
+  /v1/leases:
+    get:
+      operationId: listLeases
+      summary: Get all leases
+      description: Get all leases by propertyId or unitId passed in query string.
+      tags:
+        - Leases
+      parameters:
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+        - name: propertyUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: unitUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: List of leases
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseListResponseModelResponse'
+
+  /v1/leases/{leaseUid}:
+    get:
+      operationId: getLease
+      summary: Get specific lease details
+      description: Get specific lease details by RentalRequestId (leaseUid).
+      tags:
+        - Leases
+      parameters:
+        - name: leaseUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Unique Guid Identifier for a lease
+      responses:
+        '200':
+          description: Lease details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalLeaseDetailModelResponse'
+
+  /v1/tenants:
+    get:
+      operationId: listTenants
+      summary: Get all tenants for a lease
+      description: Get all tenants for a PO based on lease id.
+      tags:
+        - Tenants
+      parameters:
+        - name: leaseUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+          description: Unique Guid Identifier for a lease
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShortInfoListResponseResponse'
+
+  /v1/tenants/{tenantUid}:
+    get:
+      operationId: getTenant
+      summary: Get a tenant by ID
+      description: Get a tenant based on tenant id.
+      tags:
+        - Tenants
+      parameters:
+        - name: tenantUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier of a tenant
+      responses:
+        '200':
+          description: Tenant details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShortInfoResponseModelResponse'
+
+  /v1/invoices:
+    get:
+      operationId: listInvoices
+      summary: Get all invoices
+      description: Get all invoices for a PO based on lease id and tenant id.
+      tags:
+        - Invoices
+      parameters:
+        - name: leaseUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+          description: leaseUid for which invoices need to be fetched
+        - name: tenantUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+          description: tenantUid for which invoices need to be fetched
+        - name: pageNumber
+          in: query
+          schema:
+            type: integer
+          description: PageNumber is the number of page requested
+      responses:
+        '200':
+          description: List of invoices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceShortInfoListResponseModelResponse'
+    post:
+      operationId: createInvoice
+      summary: Create an invoice
+      description: Create an invoice for a specific tenant for a lease.
+      tags:
+        - Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvoiceModel'
+      responses:
+        '200':
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInvoiceResponseModelResponse'
+
+  /v1/invoices/{invoiceUid}:
+    get:
+      operationId: getInvoice
+      summary: Get an invoice by ID
+      description: Get an invoice based on invoice id.
+      tags:
+        - Invoices
+      parameters:
+        - name: invoiceUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier of an invoice
+      responses:
+        '200':
+          description: Invoice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceShortInfoResponseModelResponse'
+
+  /v1/invoices/{invoiceUid}/payments:
+    post:
+      operationId: recordPaymentByInvoice
+      summary: Record payment towards an invoice
+      description: Record payment towards invoice of a tenant.
+      tags:
+        - Payments
+      parameters:
+        - name: invoiceUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: invoiceId should be the Id of specific invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordPaymentRequestModel'
+      responses:
+        '200':
+          description: Payment recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordPaymentResponseModelResponse'
+
+  /v1/payments:
+    get:
+      operationId: listPayments
+      summary: Get all payments
+      description: >-
+        Get all payments based on filter. DueInMonth and DueInYear are mandatory.
+        PropertyUid is mandatory for PropertyUnitUid.
+        PropertyUid and PropertyUnitUid are mandatory for TenantUid.
+      tags:
+        - Payments
+      parameters:
+        - name: DueInMonth
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The month in which requested payment was due
+        - name: DueInYear
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The year in which requested payment was due
+        - name: PropertyUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: PropertyUnitUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: TenantUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: PageNumber
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentWithAdditionalInfoListResponseResponse'
+
+  /v1/payments/{paymentUid}:
+    get:
+      operationId: getPayment
+      summary: Get payment by ID
+      description: Get payment information for given paymentUid.
+      tags:
+        - Payments
+      parameters:
+        - name: paymentUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier of a payment
+      responses:
+        '200':
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentInfoResponseModelResponse'
+
+  /v1/expenses:
+    post:
+      operationId: listExpenses
+      summary: Get all expenses
+      description: Get the expenses for the PO. PO will be identified from the Token Claims.
+      tags:
+        - Expenses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAllExpensesByFilterRequestModel'
+      responses:
+        '200':
+          description: List of expenses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseListResponseModelResponse'
+
+  /v2/maintenances:
+    get:
+      operationId: listMaintenances
+      summary: Get all maintenance tickets
+      description: >-
+        Get all maintenance tickets based on filters. IsUrgent filter should be
+        applied for urgent maintenance tickets; if false, all maintenance tickets
+        are returned as per other filters.
+      tags:
+        - Maintenance
+      parameters:
+        - name: Statuses
+          in: query
+          schema:
+            type: array
+            items:
+              type: integer
+              enum: [1, 2, 3, 4]
+          description: '1=NewRequest, 2=OldRequest, 3=Resolved, 4=ReOpened'
+          style: form
+          explode: true
+        - name: MaintenanceCategory
+          in: query
+          schema:
+            type: integer
+            enum: [1, 2, 3, 4, 5, 6, 7]
+          description: '1=Electrical, 2=Plumbing, 3=AC, 4=Heat, 5=Kitchen, 6=Appliance, 7=Other'
+        - name: TenantUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: PropertyUid
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: IsUrgent
+          in: query
+          schema:
+            type: boolean
+        - name: PageNumber
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of maintenance tickets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceListResponseModelResponse'
+    post:
+      operationId: createMaintenance
+      summary: Create a maintenance ticket
+      description: Create a maintenance ticket.
+      tags:
+        - Maintenance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceRequestModel'
+      responses:
+        '200':
+          description: Maintenance ticket created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMaintenanceResponseModelResponse'
+
+  /v2/maintenances/{maintenanceUid}/status/{maintenanceStatus}:
+    patch:
+      operationId: updateMaintenanceStatus
+      summary: Resolve or reopen a maintenance ticket
+      description: To resolve or reopen a maintenance ticket.
+      tags:
+        - Maintenance
+      parameters:
+        - name: maintenanceUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for the maintenance ticket
+        - name: maintenanceStatus
+          in: path
+          required: true
+          schema:
+            type: integer
+            enum: [111, 113]
+          description: '111=Resolved, 113=ReOpened'
+      responses:
+        '200':
+          description: Status updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponseModelResponse'
+
+  /v1/map:
+    put:
+      operationId: mapExternalReferences
+      summary: Map Innago entities to external reference IDs
+      description: Map the Innago entity with external reference id for different entity types.
+      tags:
+        - External References
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalReferenceMappingRequest'
+      responses:
+        '200':
+          description: Mapping results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalReferenceMappingResponse'
+
+  /v1/externalreferences/invoices/{externalInvoiceUid}/payments:
+    post:
+      operationId: recordExternalPayment
+      summary: Record payment towards an external invoice
+      description: Record payment towards external invoice and tenant id.
+      tags:
+        - External References
+      parameters:
+        - name: externalInvoiceUid
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: External invoiceId of the specific invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordReferencePaymentRequestModel'
+      responses:
+        '200':
+          description: Payment recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponseModelResponse'
+tags:
+  - name: Health
+    description: API health check
+  - name: Properties
+    description: Manage properties and units
+  - name: Leases
+    description: Manage lease agreements
+  - name: Tenants
+    description: Manage tenant information
+  - name: Invoices
+    description: Manage invoices
+  - name: Payments
+    description: Manage payments
+  - name: Expenses
+    description: Manage expenses
+  - name: Maintenance
+    description: Manage maintenance tickets
+  - name: External References
+    description: Map and manage external reference identifiers

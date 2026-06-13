@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-my.innago.com/openapi/schemas/lease",
+  "title": "Lease",
+  "description": "A lease agreement between a property owner and tenant(s) within the Innago platform",
+  "type": "object",
+  "properties": {
+    "leaseUid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique lease identifier"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Lease start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Lease end date"
+    },
+    "propertyName": {
+      "type": "string",
+      "description": "Name of the leased property"
+    },
+    "propertyAddress": {
+      "type": "string",
+      "description": "Address of the leased property"
+    },
+    "propertyUnitName": {
+      "type": "string",
+      "description": "Name of the leased unit"
+    },
+    "rentAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Rent amount per payment period"
+    },
+    "depositAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Security deposit amount"
+    },
+    "dueOn": {
+      "type": "integer",
+      "description": "Day of month rent is due"
+    },
+    "paymentFrequency": {
+      "type": "string",
+      "description": "How often rent is due (e.g., monthly)"
+    },
+    "listingFrequency": {
+      "type": "string"
+    },
+    "isActiveLease": {
+      "type": "boolean",
+      "description": "Whether the lease is currently active"
+    },
+    "isExpiredLease": {
+      "type": "boolean",
+      "description": "Whether the lease has expired"
+    },
+    "isExpiringLease": {
+      "type": "boolean",
+      "description": "Whether the lease is expiring soon"
+    },
+    "isFutureLease": {
+      "type": "boolean",
+      "description": "Whether the lease starts in the future"
+    },
+    "isListingArchived": {
+      "type": "boolean",
+      "description": "Whether the listing has been archived"
+    },
+    "noOfTenants": {
+      "type": "integer",
+      "description": "Number of tenants on the lease"
+    },
+    "tenants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TenantShort"
+      }
+    }
+  },
+  "definitions": {
+    "TenantShort": {
+      "type": "object",
+      "properties": {
+        "tenantUid": { "type": "string", "format": "uuid" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" }
+      }
+    }
+  }
+}

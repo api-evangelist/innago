@@ -43,7 +43,17 @@ apis:
       - type: Documentation
         url: https://docs.innago.com/
       - type: OpenAPI
-        url: https://docs.innago.com/llms.txt
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/openapi/openapi.yml
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+      - type: JSONLD
+        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
       - type: Plans
         url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
       - type: RateLimits
