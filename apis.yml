@@ -6,7 +6,7 @@ description: >-
   invoicing, and landlord-tenant communication. The API uses Bearer token and
   API key authentication and provides endpoints for properties, units, tenants,
   leases, invoices, payments, expenses, and maintenance tickets.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -27,7 +27,7 @@ apis:
       REST API for Innago property management platform enabling programmatic
       access to properties, units, tenants, leases, invoices, payments,
       expenses, and maintenance tickets.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.innago.com/
     baseURL: https://api-my.innago.com/openapi/v1
     tags:
