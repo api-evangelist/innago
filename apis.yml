@@ -77,7 +77,7 @@ common:
     url: https://innago.com/blog/
   - type: Login
     url: https://auth.innago.com/login
-  - type: SignUp
+  - type: Signup
     url: https://innago.com/get-started/
   - type: TermsOfService
     url: https://auth.innago.com/termsandcondition
