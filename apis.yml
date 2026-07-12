@@ -65,6 +65,10 @@ apis:
         url: https://innago.com/contact/
         email: support@innago.com
 common:
+  - type: DomainSecurity
+    url: security/innago-domain-security.yml
+  - type: Authentication
+    url: authentication/innago-authentication.yml
   - type: Plans
     url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
   - type: RateLimits
