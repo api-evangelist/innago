@@ -65,6 +65,8 @@ apis:
         url: https://innago.com/contact/
         email: support@innago.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/innago-agentic-access.yml
   - type: DomainSecurity
     url: security/innago-domain-security.yml
   - type: Authentication
