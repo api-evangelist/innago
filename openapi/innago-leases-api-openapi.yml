@@ -1,0 +1,185 @@
+openapi: 3.0.3
+info:
+  title: Innago Expenses Leases API
+  description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+- url: https://api-my.innago.com/openapi
+  description: Innago production API
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
+tags:
+- name: Leases
+  description: Manage lease agreements
+paths:
+  /v1/leases:
+    get:
+      operationId: listLeases
+      summary: Get all leases
+      description: Get all leases by propertyId or unitId passed in query string.
+      tags:
+      - Leases
+      parameters:
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+      - name: propertyUid
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: unitUid
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: List of leases
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseListResponseModelResponse'
+  /v1/leases/{leaseUid}:
+    get:
+      operationId: getLease
+      summary: Get specific lease details
+      description: Get specific lease details by RentalRequestId (leaseUid).
+      tags:
+      - Leases
+      parameters:
+      - name: leaseUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Unique Guid Identifier for a lease
+      responses:
+        '200':
+          description: Lease details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalLeaseDetailModelResponse'
+components:
+  schemas:
+    TenantShortModel:
+      type: object
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    FinalLeaseDetailModelResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/LeaseModel'
+          - type: object
+            properties:
+              listingFrequency:
+                type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    LeaseModel:
+      type: object
+      properties:
+        leaseUid:
+          type: string
+          format: uuid
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        propertyName:
+          type: string
+        propertyAddress:
+          type: string
+        propertyUnitName:
+          type: string
+        rentAmount:
+          type: number
+          format: double
+        depositAmount:
+          type: number
+          format: double
+        dueOn:
+          type: integer
+        paymentFrequency:
+          type: string
+        isActiveLease:
+          type: boolean
+        isExpiredLease:
+          type: boolean
+        isExpiringLease:
+          type: boolean
+        isFutureLease:
+          type: boolean
+        isListingArchived:
+          type: boolean
+        noOfTenants:
+          type: integer
+        tenants:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantShortModel'
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    LeaseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaseModel'
+            paging:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

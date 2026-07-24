@@ -1,0 +1,147 @@
+openapi: 3.0.3
+info:
+  title: Innago Expenses External References API
+  description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+- url: https://api-my.innago.com/openapi
+  description: Innago production API
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
+tags:
+- name: External References
+  description: Map and manage external reference identifiers
+paths:
+  /v1/map:
+    put:
+      operationId: mapExternalReferences
+      summary: Map Innago entities to external reference IDs
+      description: Map the Innago entity with external reference id for different entity types.
+      tags:
+      - External References
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalReferenceMappingRequest'
+      responses:
+        '200':
+          description: Mapping results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalReferenceMappingResponse'
+  /v1/externalreferences/invoices/{externalInvoiceUid}/payments:
+    post:
+      operationId: recordExternalPayment
+      summary: Record payment towards an external invoice
+      description: Record payment towards external invoice and tenant id.
+      tags:
+      - External References
+      parameters:
+      - name: externalInvoiceUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: External invoiceId of the specific invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordReferencePaymentRequestModel'
+      responses:
+        '200':
+          description: Payment recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponseModelResponse'
+components:
+  schemas:
+    ExternalReferenceMappingResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            mappingResults:
+              type: array
+              items:
+                type: object
+                properties:
+                  entityType:
+                    type: string
+                  entityId:
+                    type: string
+                    format: uuid
+                  externalReferenceId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                  failureReason:
+                    type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    ExternalReferenceMappingRequest:
+      type: array
+      items:
+        type: object
+        properties:
+          entityType:
+            type: string
+            description: Property, PropertyUnit, Lease, Tenant
+          entityId:
+            type: string
+            format: uuid
+          externalReferenceId:
+            type: string
+            format: uuid
+    RecordReferencePaymentRequestModel:
+      type: object
+      properties:
+        externalTenantGuid:
+          type: string
+          format: uuid
+          description: External Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

@@ -1,0 +1,264 @@
+openapi: 3.0.3
+info:
+  title: Innago Expenses Properties API
+  description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+- url: https://api-my.innago.com/openapi
+  description: Innago production API
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
+tags:
+- name: Properties
+  description: Manage properties and units
+paths:
+  /v1/properties:
+    get:
+      operationId: listProperties
+      summary: Get all properties
+      description: Get all properties for the authenticated PO. PO identifier is fetched from token claims.
+      tags:
+      - Properties
+      parameters:
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+        description: Pagination support; defaults to 1
+      responses:
+        '200':
+          description: List of properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInfoListResponseModelResponse'
+  /v1/properties/{propertyUid}:
+    get:
+      operationId: getProperty
+      summary: Get property by ID
+      description: Get all properties for a PO by propertyId. PO Identifier will be fetched from the token claims.
+      tags:
+      - Properties
+      parameters:
+      - name: propertyUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier for a specific property
+      responses:
+        '200':
+          description: Property details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyInfoResponseModelResponse'
+  /v1/properties/{propertyUid}/units:
+    get:
+      operationId: listPropertyUnits
+      summary: Get all units for a property
+      description: Get all property units by propertyId.
+      tags:
+      - Properties
+      parameters:
+      - name: propertyUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The Id of the specific property
+      responses:
+        '200':
+          description: List of property units
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyUnitListResponseModelResponse'
+  /v1/properties/{propertyUid}/units/{unitUid}:
+    get:
+      operationId: getPropertyUnit
+      summary: Get details of a specific unit
+      description: Get details of a specific unit under a property.
+      tags:
+      - Properties
+      parameters:
+      - name: propertyUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: unitUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Property unit details including tenants
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyUnitDetailResponseModelResponse'
+components:
+  schemas:
+    TenantShortModel:
+      type: object
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    AddressResponseModel:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        stateShortName:
+          type: string
+        city:
+          type: string
+        zipcode:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    PropertyInfoListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            properties:
+              type: array
+              items:
+                $ref: '#/components/schemas/PropertyInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    PropertyUnitDetailResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            unit:
+              $ref: '#/components/schemas/PropertyUnitModel'
+            tenants:
+              type: array
+              items:
+                $ref: '#/components/schemas/TenantShortModel'
+            entityType:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyInfoModel:
+      type: object
+      properties:
+        propertyUid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        numberOfUnits:
+          type: integer
+        availableUnits:
+          type: integer
+        totalTenants:
+          type: integer
+        numberOfOpenMainatainanceRequests:
+          type: integer
+        propertyType:
+          type: string
+        isArchived:
+          type: boolean
+        address:
+          $ref: '#/components/schemas/AddressResponseModel'
+        entityType:
+          type: string
+        propertyOwnerUid:
+          type: string
+          format: uuid
+    PropertyInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PropertyInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyUnitModel:
+      type: object
+      properties:
+        name:
+          type: string
+        propertyUnitUid:
+          type: string
+          format: uuid
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    PropertyUnitListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            units:
+              type: array
+              items:
+                $ref: '#/components/schemas/PropertyUnitModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

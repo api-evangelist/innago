@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: Innago Expenses API
+  description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+- url: https://api-my.innago.com/openapi
+  description: Innago production API
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
+tags:
+- name: Expenses
+  description: Manage expenses
+paths:
+  /v1/expenses:
+    post:
+      operationId: listExpenses
+      summary: Get all expenses
+      description: Get the expenses for the PO. PO will be identified from the Token Claims.
+      tags:
+      - Expenses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAllExpensesByFilterRequestModel'
+      responses:
+        '200':
+          description: List of expenses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseListResponseModelResponse'
+components:
+  schemas:
+    ExpenseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            expenseListModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExpenseShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+            totalRecords:
+              type: integer
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ExpenseShortInfoModel:
+      type: object
+      properties:
+        expenseUid:
+          type: string
+          format: uuid
+        category:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date-time
+        businessEntityUid:
+          type: string
+          format: uuid
+        businessEntityName:
+          type: string
+        payeeName:
+          type: string
+        payeeEmail:
+          type: string
+        payeePhone:
+          type: string
+        payeeCategory:
+          type: string
+        amount:
+          type: number
+          format: double
+        bankName:
+          type: string
+        propertyUid:
+          type: string
+          format: uuid
+        propertyUnitUid:
+          type: string
+          format: uuid
+    GetAllExpensesByFilterRequestModel:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        dateFrom:
+          type: string
+          format: date-time
+          nullable: true
+        dateTo:
+          type: string
+          format: date-time
+          nullable: true
+        propertyUids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        propertyUnitUids:
+          type: array
+          items:
+            type: string
+            format: uuid
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

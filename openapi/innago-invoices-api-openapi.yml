@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info:
+  title: Innago Expenses Invoices API
+  description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+- url: https://api-my.innago.com/openapi
+  description: Innago production API
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
+tags:
+- name: Invoices
+  description: Manage invoices
+paths:
+  /v1/invoices:
+    get:
+      operationId: listInvoices
+      summary: Get all invoices
+      description: Get all invoices for a PO based on lease id and tenant id.
+      tags:
+      - Invoices
+      parameters:
+      - name: leaseUid
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: leaseUid for which invoices need to be fetched
+      - name: tenantUid
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: tenantUid for which invoices need to be fetched
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+        description: PageNumber is the number of page requested
+      responses:
+        '200':
+          description: List of invoices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceShortInfoListResponseModelResponse'
+    post:
+      operationId: createInvoice
+      summary: Create an invoice
+      description: Create an invoice for a specific tenant for a lease.
+      tags:
+      - Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvoiceModel'
+      responses:
+        '200':
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInvoiceResponseModelResponse'
+  /v1/invoices/{invoiceUid}:
+    get:
+      operationId: getInvoice
+      summary: Get an invoice by ID
+      description: Get an invoice based on invoice id.
+      tags:
+      - Invoices
+      parameters:
+      - name: invoiceUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier of an invoice
+      responses:
+        '200':
+          description: Invoice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceShortInfoResponseModelResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    InvoiceShortInfoListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            invoiceShortInfoResponseModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/InvoiceShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    InvoiceShortInfoModel:
+      type: object
+      properties:
+        invoiceNumber:
+          type: integer
+          format: int64
+        invoiceUid:
+          type: string
+          format: uuid
+        invoiceDueDate:
+          type: string
+          format: date-time
+        invoiceStatus:
+          type: string
+          description: Pending, Fully Paid, Partially Paid
+        amount:
+          type: number
+          format: double
+        entityType:
+          type: string
+    CreateInvoiceModel:
+      type: object
+      required:
+      - tenantUid
+      - leaseUid
+      - amount
+      - dueDate
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        leaseUid:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        item:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    CreateInvoiceResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            invoiceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    InvoiceShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InvoiceShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

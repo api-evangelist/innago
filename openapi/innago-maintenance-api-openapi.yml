@@ -1,0 +1,305 @@
+openapi: 3.0.3
+info:
+  title: Innago Expenses Maintenance API
+  description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+- url: https://api-my.innago.com/openapi
+  description: Innago production API
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
+tags:
+- name: Maintenance
+  description: Manage maintenance tickets
+paths:
+  /v2/maintenances:
+    get:
+      operationId: listMaintenances
+      summary: Get all maintenance tickets
+      description: Get all maintenance tickets based on filters. IsUrgent filter should be applied for urgent maintenance tickets; if false, all maintenance tickets are returned as per other filters.
+      tags:
+      - Maintenance
+      parameters:
+      - name: Statuses
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+            enum:
+            - 1
+            - 2
+            - 3
+            - 4
+        description: 1=NewRequest, 2=OldRequest, 3=Resolved, 4=ReOpened
+        style: form
+        explode: true
+      - name: MaintenanceCategory
+        in: query
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+        description: 1=Electrical, 2=Plumbing, 3=AC, 4=Heat, 5=Kitchen, 6=Appliance, 7=Other
+      - name: TenantUid
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: PropertyUid
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: IsUrgent
+        in: query
+        schema:
+          type: boolean
+      - name: PageNumber
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of maintenance tickets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceListResponseModelResponse'
+    post:
+      operationId: createMaintenance
+      summary: Create a maintenance ticket
+      description: Create a maintenance ticket.
+      tags:
+      - Maintenance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceRequestModel'
+      responses:
+        '200':
+          description: Maintenance ticket created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMaintenanceResponseModelResponse'
+  /v2/maintenances/{maintenanceUid}/status/{maintenanceStatus}:
+    patch:
+      operationId: updateMaintenanceStatus
+      summary: Resolve or reopen a maintenance ticket
+      description: To resolve or reopen a maintenance ticket.
+      tags:
+      - Maintenance
+      parameters:
+      - name: maintenanceUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier for the maintenance ticket
+      - name: maintenanceStatus
+        in: path
+        required: true
+        schema:
+          type: integer
+          enum:
+          - 111
+          - 113
+        description: 111=Resolved, 113=ReOpened
+      responses:
+        '200':
+          description: Status updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponseModelResponse'
+components:
+  schemas:
+    MaintenanceRequestModel:
+      type: object
+      required:
+      - maintenanceTicketName
+      - description
+      - selectedProperties
+      properties:
+        maintenanceTicketName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Name of maintenance ticket
+        description:
+          type: string
+          minLength: 1
+          maxLength: 1024
+          description: Description of maintenance ticket
+        selectedProperties:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Properties for maintenance ticket
+        maintenanceCategory:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          description: 1=Electrical, 2=Plumbing, 3=AC, 4=Heat, 5=Kitchen, 6=Appliance, 7=Other
+        isUrgent:
+          type: boolean
+          description: Mark if maintenance ticket is urgent
+        isNotifyTenant:
+          type: boolean
+          description: Mark if tenant needs to be notified
+        selectedPropertyUnits:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Required if isNotifyTenant is true
+        tenantUid:
+          type: string
+          format: uuid
+          description: Required if maintenance ticket needs to be created on behalf of Tenant
+        files:
+          type: array
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/FileModel'
+          description: Attachments, max 10 files, 20MB each
+    MaintenanceListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            resolvedMaintenanceCount:
+              type: integer
+            openMaintenanceCount:
+              type: integer
+            newMaintenanceCount:
+              type: integer
+            totalRequestCount:
+              type: integer
+            maintenances:
+              type: array
+              items:
+                $ref: '#/components/schemas/MaintenanceTicketModel'
+            isMaintenanceRequestOn:
+              type: boolean
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    CreateMaintenanceResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+            maintenanceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    FileModel:
+      type: object
+      properties:
+        fileName:
+          type: string
+        fileContent:
+          type: string
+          format: byte
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    MaintenanceTicketModel:
+      type: object
+      properties:
+        maintenanceUid:
+          type: string
+          format: uuid
+        personName:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        dateSubmitted:
+          type: string
+          format: date-time
+        dateResolved:
+          type: string
+          format: date-time
+          nullable: true
+        isUrgent:
+          type: boolean
+        property:
+          type: string
+        unit:
+          type: string
+        propertyAddress:
+          type: string
+        personUid:
+          type: string
+          format: uuid
+        requestStatus:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

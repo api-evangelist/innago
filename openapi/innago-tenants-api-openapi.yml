@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: Innago Expenses Tenants API
+  description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
+  version: v1
+  contact:
+    name: Innago Support
+    url: https://innago.com/contact/
+    email: support@innago.com
+  termsOfService: https://auth.innago.com/termsandcondition
+servers:
+- url: https://api-my.innago.com/openapi
+  description: Innago production API
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
+tags:
+- name: Tenants
+  description: Manage tenant information
+paths:
+  /v1/tenants:
+    get:
+      operationId: listTenants
+      summary: Get all tenants for a lease
+      description: Get all tenants for a PO based on lease id.
+      tags:
+      - Tenants
+      parameters:
+      - name: leaseUid
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: Unique Guid Identifier for a lease
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShortInfoListResponseResponse'
+  /v1/tenants/{tenantUid}:
+    get:
+      operationId: getTenant
+      summary: Get a tenant by ID
+      description: Get a tenant based on tenant id.
+      tags:
+      - Tenants
+      parameters:
+      - name: tenantUid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier of a tenant
+      responses:
+        '200':
+          description: Tenant details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShortInfoResponseModelResponse'
+components:
+  schemas:
+    UserShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    UserShortInfoListResponseResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            userShortInfoModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          nullable: true
+        errorCode:
+          type: string
+          nullable: true
+    UserShortInfoModel:
+      type: object
+      properties:
+        userUid:
+          type: string
+          format: uuid
+        userFirstName:
+          type: string
+          nullable: true
+        userLastName:
+          type: string
+          nullable: true
+        userEmail:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        userRole:
+          type: string
+          nullable: true
+          description: PO, Tenant, Applicant, etc.
+        entityType:
+          type: string
+          nullable: true
+          description: Property, PropertyUnit, Lease, Tenant, Invoice, Payment, Maintenance, or Applicant
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
