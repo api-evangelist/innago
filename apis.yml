@@ -6,7 +6,20 @@ description: >-
   invoicing, and landlord-tenant communication. The API uses Bearer token and
   API key authentication and provides endpoints for properties, units, tenants,
   leases, invoices, payments, expenses, and maintenance tickets.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/innago.png
 url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -21,49 +34,321 @@ tags:
   - Invoicing
   - Payments
 apis:
-  - aid: innago:innago-api
-    name: Innago API
-    description: >-
-      REST API for Innago property management platform enabling programmatic
-      access to properties, units, tenants, leases, invoices, payments,
-      expenses, and maintenance tickets.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.innago.com/
-    baseURL: https://api-my.innago.com/openapi/v1
-    tags:
-      - Property Management
-      - Real Estate
-      - Leases
-      - Tenants
-      - Rent Collection
-      - Maintenance
-      - Invoicing
-      - Payments
-    properties:
-      - type: Documentation
-        url: https://docs.innago.com/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/openapi/openapi.yml
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
-      - type: JSONLD
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
-    contact:
-      - FN: Innago Support
-        url: https://innago.com/contact/
-        email: support@innago.com
+- aid: innago:innago-expenses-api
+  name: Innago Expenses API
+  description: Manage expenses
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Expenses
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-expenses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-external-references-api
+  name: Innago External References API
+  description: Map and manage external reference identifiers
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - External References
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-external-references-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-health-api
+  name: Innago Health API
+  description: API health check
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-invoices-api
+  name: Innago Invoices API
+  description: Manage invoices
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-leases-api
+  name: Innago Leases API
+  description: Manage lease agreements
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Leases
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-leases-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-maintenance-api
+  name: Innago Maintenance API
+  description: Manage maintenance tickets
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Maintenance
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-maintenance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-payments-api
+  name: Innago Payments API
+  description: Manage payments
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-properties-api
+  name: Innago Properties API
+  description: Manage properties and units
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-properties-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
+- aid: innago:innago-tenants-api
+  name: Innago Tenants API
+  description: Manage tenant information
+  humanURL: https://docs.innago.com/
+  baseURL: https://api-my.innago.com/openapi/v1
+  tags:
+  - Tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/innago-tenants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.innago.com/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/property.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/lease.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/invoice.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-schema/maintenance.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/json-ld/innago.jsonld
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
 common:
   - type: AgenticAccess
     url: agentic-access/innago-agentic-access.yml
