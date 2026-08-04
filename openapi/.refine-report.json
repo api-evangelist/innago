@@ -1,0 +1,30 @@
+{
+  "provider": "innago",
+  "sources": [
+    "innago-expenses-api-openapi.yml",
+    "innago-external-references-api-openapi.yml",
+    "innago-health-api-openapi.yml",
+    "innago-invoices-api-openapi.yml",
+    "innago-leases-api-openapi.yml",
+    "innago-maintenance-api-openapi.yml",
+    "innago-payments-api-openapi.yml",
+    "innago-properties-api-openapi.yml",
+    "innago-tenants-api-openapi.yml"
+  ],
+  "outputs": [
+    "innago-expenses-api-openapi.yml",
+    "innago-external-references-api-openapi.yml",
+    "innago-health-api-openapi.yml",
+    "innago-invoices-api-openapi.yml",
+    "innago-leases-api-openapi.yml",
+    "innago-maintenance-api-openapi.yml",
+    "innago-payments-api-openapi.yml",
+    "innago-properties-api-openapi.yml",
+    "innago-tenants-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
