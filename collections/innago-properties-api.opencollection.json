@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses Properties API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/properties",
+            "params": [
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Pagination support; defaults to 1"
+              }
+            ]
+          },
+          "docs": "Get all properties for the authenticated PO. PO identifier is fetched from token claims."
+        },
+        {
+          "info": {
+            "name": "Get property by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/properties/:propertyUid",
+            "params": [
+              {
+                "name": "propertyUid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for a specific property"
+              }
+            ]
+          },
+          "docs": "Get all properties for a PO by propertyId. PO Identifier will be fetched from the token claims."
+        },
+        {
+          "info": {
+            "name": "Get all units for a property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/properties/:propertyUid/units",
+            "params": [
+              {
+                "name": "propertyUid",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the specific property"
+              }
+            ]
+          },
+          "docs": "Get all property units by propertyId."
+        },
+        {
+          "info": {
+            "name": "Get details of a specific unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/properties/:propertyUid/units/:unitUid",
+            "params": [
+              {
+                "name": "propertyUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "unitUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get details of a specific unit under a property."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

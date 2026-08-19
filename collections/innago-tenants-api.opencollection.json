@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses Tenants API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tenants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all tenants for a lease",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/tenants",
+            "params": [
+              {
+                "name": "leaseUid",
+                "value": "",
+                "type": "query",
+                "description": "Unique Guid Identifier for a lease"
+              }
+            ]
+          },
+          "docs": "Get all tenants for a PO based on lease id."
+        },
+        {
+          "info": {
+            "name": "Get a tenant by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/tenants/:tenantUid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant"
+              }
+            ]
+          },
+          "docs": "Get a tenant based on tenant id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses External References API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "External References",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Map Innago entities to external reference IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-my.innago.com/openapi/v1/map",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Map the Innago entity with external reference id for different entity types."
+        },
+        {
+          "info": {
+            "name": "Record payment towards an external invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-my.innago.com/openapi/v1/externalreferences/invoices/:externalInvoiceUid/payments",
+            "params": [
+              {
+                "name": "externalInvoiceUid",
+                "value": "",
+                "type": "path",
+                "description": "External invoiceId of the specific invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record payment towards external invoice and tenant id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

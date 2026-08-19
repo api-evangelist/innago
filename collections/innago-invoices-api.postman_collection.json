@@ -1,0 +1,352 @@
+{
+  "item": [
+    {
+      "id": "5d2f77f7-c520-4e46-a261-aceec07f4375",
+      "name": "Invoices",
+      "description": {
+        "content": "Manage invoices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94830550-78ef-4f99-b281-4caf8f9ba1dc",
+          "name": "Get all invoices",
+          "request": {
+            "name": "Get all invoices",
+            "description": {
+              "content": "Get all invoices for a PO based on lease id and tenant id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "leaseUid",
+                  "value": "<uuid>",
+                  "description": "leaseUid for which invoices need to be fetched"
+                },
+                {
+                  "disabled": false,
+                  "key": "tenantUid",
+                  "value": "<uuid>",
+                  "description": "tenantUid for which invoices need to be fetched"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "<integer>",
+                  "description": "PageNumber is the number of page requested"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7490ed4-0703-4648-95d1-c5ef78262b20",
+              "name": "List of invoices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "leaseUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "tenantUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"invoiceShortInfoResponseModel\": [\n      {\n        \"invoiceNumber\": 2247,\n        \"invoiceUid\": \"91211fc7-5618-cba8-c37b-f7963ce53790\",\n        \"invoiceDueDate\": \"2014-07-19T19:48:57.711Z\",\n        \"invoiceStatus\": \"string\",\n        \"amount\": 6194.463007843308,\n        \"entityType\": \"string\"\n      },\n      {\n        \"invoiceNumber\": 9794,\n        \"invoiceUid\": \"0f8bf85b-4a70-2d0f-597e-8f957a9584c9\",\n        \"invoiceDueDate\": \"1994-02-17T11:46:37.770Z\",\n        \"invoiceStatus\": \"string\",\n        \"amount\": 9499.452655838284,\n        \"entityType\": \"string\"\n      }\n    ],\n    \"pagingModel\": {\n      \"pageSize\": 3116,\n      \"currentPage\": 662,\n      \"pageCount\": 5457,\n      \"totalRecords\": 2142\n    }\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94df53c2-c22d-4985-8323-210370ea06e3",
+          "name": "Create an invoice",
+          "request": {
+            "name": "Create an invoice",
+            "description": {
+              "content": "Create an invoice for a specific tenant for a lease.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantUid\": \"<uuid>\",\n  \"leaseUid\": \"<uuid>\",\n  \"amount\": \"<double>\",\n  \"dueDate\": \"<dateTime>\",\n  \"item\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f874859c-1118-4505-a916-d04f8ebb39fa",
+              "name": "Invoice created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantUid\": \"<uuid>\",\n  \"leaseUid\": \"<uuid>\",\n  \"amount\": \"<double>\",\n  \"dueDate\": \"<dateTime>\",\n  \"item\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"invoiceUid\": \"9514473d-77ef-16a4-d8b2-f4f4d60761c3\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7b1e0a4-ee19-420c-aba7-dbcce5ef0551",
+          "name": "Get an invoice by ID",
+          "request": {
+            "name": "Get an invoice by ID",
+            "description": {
+              "content": "Get an invoice based on invoice id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "invoices",
+                ":invoiceUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "invoiceUid",
+                  "description": "(Required) The unique identifier of an invoice"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c7f66fa-20d8-4889-ac94-8aa795eb82b0",
+              "name": "Invoice details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "invoices",
+                    ":invoiceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "invoiceUid",
+                      "description": "(Required) The unique identifier of an invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"invoiceNumber\": 1518,\n    \"invoiceUid\": \"da5343a7-b9fa-f7d7-9cd8-5d50401d74f9\",\n    \"invoiceDueDate\": \"1959-05-01T16:17:24.446Z\",\n    \"invoiceStatus\": \"string\",\n    \"amount\": 1642.0544495373258,\n    \"entityType\": \"string\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "84508df8-268c-454d-bcdd-8d9f1557b972",
+    "name": "Innago Expenses Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

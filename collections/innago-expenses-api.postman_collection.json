@@ -1,0 +1,142 @@
+{
+  "item": [
+    {
+      "id": "91f66855-6346-4da3-a76a-591cb5106bbe",
+      "name": "Expenses",
+      "description": {
+        "content": "Manage expenses",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57d878c2-9662-4a77-a947-ae0ea2950918",
+          "name": "Get all expenses",
+          "request": {
+            "name": "Get all expenses",
+            "description": {
+              "content": "Get the expenses for the PO. PO will be identified from the Token Claims.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "expenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pageNumber\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"dateFrom\": \"<dateTime>\",\n  \"dateTo\": \"<dateTime>\",\n  \"propertyUids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"propertyUnitUids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "080f158a-0c60-4a56-b74b-165748e91bcc",
+              "name": "List of expenses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "expenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pageNumber\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"dateFrom\": \"<dateTime>\",\n  \"dateTo\": \"<dateTime>\",\n  \"propertyUids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"propertyUnitUids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"expenseListModel\": [\n      {\n        \"expenseUid\": \"1d846f07-b74d-0468-2ba2-c65f3b03d02b\",\n        \"category\": \"string\",\n        \"description\": \"string\",\n        \"date\": \"1973-06-06T05:14:51.717Z\",\n        \"businessEntityUid\": \"78c1a7ff-6c20-411f-d9bb-70d01f22fda2\",\n        \"businessEntityName\": \"string\",\n        \"payeeName\": \"string\",\n        \"payeeEmail\": \"string\",\n        \"payeePhone\": \"string\",\n        \"payeeCategory\": \"string\",\n        \"amount\": 9825.617136591976,\n        \"bankName\": \"string\",\n        \"propertyUid\": \"f7a33cc0-4f31-2925-c89d-b5ba8eacd976\",\n        \"propertyUnitUid\": \"8a211c2a-a30a-1c7b-cdc6-53358f278b16\"\n      },\n      {\n        \"expenseUid\": \"f1a33919-26b5-aaad-cd06-055f35bc9c04\",\n        \"category\": \"string\",\n        \"description\": \"string\",\n        \"date\": \"2003-12-11T06:14:32.584Z\",\n        \"businessEntityUid\": \"a4917181-b508-7aa8-df87-77b4e4f56a19\",\n        \"businessEntityName\": \"string\",\n        \"payeeName\": \"string\",\n        \"payeeEmail\": \"string\",\n        \"payeePhone\": \"string\",\n        \"payeeCategory\": \"string\",\n        \"amount\": 6512.6065372648045,\n        \"bankName\": \"string\",\n        \"propertyUid\": \"2285935c-3f1b-906e-9b6b-f37e3eff831b\",\n        \"propertyUnitUid\": \"7e5e2853-e675-293b-3d78-09758dfa4a8f\"\n      }\n    ],\n    \"pagingModel\": {\n      \"pageSize\": 7980,\n      \"currentPage\": 9884,\n      \"pageCount\": 8329,\n      \"totalRecords\": 1502\n    },\n    \"totalRecords\": 3066\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "be1aa468-3f48-4de3-82ac-7aeb27fb14ac",
+    "name": "Innago Expenses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

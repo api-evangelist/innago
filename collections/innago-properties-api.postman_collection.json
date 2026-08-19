@@ -1,0 +1,447 @@
+{
+  "item": [
+    {
+      "id": "3bdde2ea-2560-43f0-8904-c18fcccee662",
+      "name": "Properties",
+      "description": {
+        "content": "Manage properties and units",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99ac1a64-ac3c-40bb-994a-8d75d2be31d7",
+          "name": "Get all properties",
+          "request": {
+            "name": "Get all properties",
+            "description": {
+              "content": "Get all properties for the authenticated PO. PO identifier is fetched from token claims.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "properties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "<integer>",
+                  "description": "Pagination support; defaults to 1"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b231253-ca91-45dc-bd1c-2a436c6d9ba6",
+              "name": "List of properties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "properties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"properties\": [\n      {\n        \"propertyUid\": \"2238b162-fc11-1551-c230-1e500a074135\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"numberOfUnits\": 3596,\n        \"availableUnits\": 6416,\n        \"totalTenants\": 8032,\n        \"numberOfOpenMainatainanceRequests\": 3709,\n        \"propertyType\": \"string\",\n        \"isArchived\": false,\n        \"address\": {\n          \"addressLine1\": \"string\",\n          \"addressLine2\": \"string\",\n          \"country\": \"string\",\n          \"state\": \"string\",\n          \"stateShortName\": \"string\",\n          \"city\": \"string\",\n          \"zipcode\": \"string\",\n          \"latitude\": 2257.052875340171,\n          \"longitude\": 9.73243826922987\n        },\n        \"entityType\": \"string\",\n        \"propertyOwnerUid\": \"80603e77-8c16-6707-79ee-672d89276272\"\n      },\n      {\n        \"propertyUid\": \"8b676d1f-c758-f1c0-63a1-2d63c82d05c3\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"numberOfUnits\": 9637,\n        \"availableUnits\": 5631,\n        \"totalTenants\": 1601,\n        \"numberOfOpenMainatainanceRequests\": 1083,\n        \"propertyType\": \"string\",\n        \"isArchived\": true,\n        \"address\": {\n          \"addressLine1\": \"string\",\n          \"addressLine2\": \"string\",\n          \"country\": \"string\",\n          \"state\": \"string\",\n          \"stateShortName\": \"string\",\n          \"city\": \"string\",\n          \"zipcode\": \"string\",\n          \"latitude\": 8607.095431962807,\n          \"longitude\": 3850.1019439326965\n        },\n        \"entityType\": \"string\",\n        \"propertyOwnerUid\": \"34d66791-170d-e9e9-b329-beffd41fb3c3\"\n      }\n    ],\n    \"pagingModel\": {\n      \"pageSize\": 4662,\n      \"currentPage\": 6754,\n      \"pageCount\": 2996,\n      \"totalRecords\": 8952\n    }\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd657e0a-2bc8-4b5a-9c44-baef6b7d2fff",
+          "name": "Get property by ID",
+          "request": {
+            "name": "Get property by ID",
+            "description": {
+              "content": "Get all properties for a PO by propertyId. PO Identifier will be fetched from the token claims.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "properties",
+                ":propertyUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "propertyUid",
+                  "description": "(Required) The unique identifier for a specific property"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b378c5d6-e2b0-4dfd-a623-45b9a8c631a8",
+              "name": "Property details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "properties",
+                    ":propertyUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "propertyUid",
+                      "description": "(Required) The unique identifier for a specific property"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"propertyUid\": \"e4e0d937-ca84-1b65-3a8f-e5c738c32bd2\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"numberOfUnits\": 9082,\n    \"availableUnits\": 1285,\n    \"totalTenants\": 9122,\n    \"numberOfOpenMainatainanceRequests\": 4547,\n    \"propertyType\": \"string\",\n    \"isArchived\": false,\n    \"address\": {\n      \"addressLine1\": \"string\",\n      \"addressLine2\": \"string\",\n      \"country\": \"string\",\n      \"state\": \"string\",\n      \"stateShortName\": \"string\",\n      \"city\": \"string\",\n      \"zipcode\": \"string\",\n      \"latitude\": 5396.648405518956,\n      \"longitude\": 4572.18093215008\n    },\n    \"entityType\": \"string\",\n    \"propertyOwnerUid\": \"20795855-7844-b721-b852-f2b1de9c5632\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00dbe2bf-9a52-4943-a2af-80a4007e232a",
+          "name": "Get all units for a property",
+          "request": {
+            "name": "Get all units for a property",
+            "description": {
+              "content": "Get all property units by propertyId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "properties",
+                ":propertyUid",
+                "units"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "propertyUid",
+                  "description": "(Required) The Id of the specific property"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ff35aef-ea18-4626-9d43-47781120f2c8",
+              "name": "List of property units",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "properties",
+                    ":propertyUid",
+                    "units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "propertyUid",
+                      "description": "(Required) The Id of the specific property"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"units\": [\n      {\n        \"name\": \"string\",\n        \"propertyUnitUid\": \"6a72681d-2620-36eb-10f6-412c29b1d9c9\"\n      },\n      {\n        \"name\": \"string\",\n        \"propertyUnitUid\": \"0be907d8-dbdd-440a-26c5-4d9bd579a3fe\"\n      }\n    ]\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c184a57-3f85-43d9-97bb-76d48dd8e67f",
+          "name": "Get details of a specific unit",
+          "request": {
+            "name": "Get details of a specific unit",
+            "description": {
+              "content": "Get details of a specific unit under a property.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "properties",
+                ":propertyUid",
+                "units",
+                ":unitUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "propertyUid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "unitUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f8ace70-c957-4054-9aea-4651bd6012df",
+              "name": "Property unit details including tenants",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "properties",
+                    ":propertyUid",
+                    "units",
+                    ":unitUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "propertyUid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "unitUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"unit\": {\n      \"name\": \"string\",\n      \"propertyUnitUid\": \"6e973f3e-436d-d5a1-80b9-c8a6d498f4ea\"\n    },\n    \"tenants\": [\n      {\n        \"tenantUid\": \"32de44fa-4afb-6c99-2d6b-4b893ab530cc\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"email\": \"string\",\n        \"phone\": \"string\"\n      },\n      {\n        \"tenantUid\": \"19737bfb-6bb6-49f2-db0b-3705a63780b4\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"email\": \"string\",\n        \"phone\": \"string\"\n      }\n    ],\n    \"entityType\": \"string\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1657c548-c14f-4572-bfe6-be4b2c64da3a",
+    "name": "Innago Expenses Properties API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

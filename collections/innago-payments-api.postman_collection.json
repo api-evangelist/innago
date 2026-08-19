@@ -1,0 +1,398 @@
+{
+  "item": [
+    {
+      "id": "b4a0551d-6aec-430a-85f1-82eae1599bba",
+      "name": "Payments",
+      "description": {
+        "content": "Manage payments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f71a1ab5-0273-42c1-ac67-0ecbf495705f",
+          "name": "Record payment towards an invoice",
+          "request": {
+            "name": "Record payment towards an invoice",
+            "description": {
+              "content": "Record payment towards invoice of a tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "invoices",
+                ":invoiceUid",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "invoiceUid",
+                  "description": "(Required) invoiceId should be the Id of specific invoice"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantUid\": \"<uuid>\",\n  \"amount\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98cbdf14-c332-4c3a-94c1-bf0d8de98a93",
+              "name": "Payment recorded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "invoices",
+                    ":invoiceUid",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "invoiceUid",
+                      "description": "(Required) invoiceId should be the Id of specific invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenantUid\": \"<uuid>\",\n  \"amount\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"paymentUid\": \"28f825d0-71ed-f95f-46dc-8c78944a8708\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "881fcee2-7013-4ba7-ac05-90be5e29c4bc",
+          "name": "Get all payments",
+          "request": {
+            "name": "Get all payments",
+            "description": {
+              "content": "Get all payments based on filter. DueInMonth and DueInYear are mandatory. PropertyUid is mandatory for PropertyUnitUid. PropertyUid and PropertyUnitUid are mandatory for TenantUid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "DueInMonth",
+                  "value": "<integer>",
+                  "description": "(Required) The month in which requested payment was due"
+                },
+                {
+                  "disabled": false,
+                  "key": "DueInYear",
+                  "value": "<integer>",
+                  "description": "(Required) The year in which requested payment was due"
+                },
+                {
+                  "disabled": false,
+                  "key": "PropertyUid",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "PropertyUnitUid",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "TenantUid",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "PageNumber",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "461dfbeb-877d-46f0-9f2c-b45598236690",
+              "name": "List of payments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DueInMonth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "DueInYear",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "PropertyUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "PropertyUnitUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "TenantUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "PageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"paymentWithAdditionalInfoResponses\": [\n      {\n        \"propertyUid\": \"aa948329-51a8-4af3-2322-f08251b79977\",\n        \"propertyName\": \"string\",\n        \"propertyUnitUid\": \"7fd0eda4-b08f-afa0-c319-af5d3c625623\",\n        \"propertyUnitName\": \"string\",\n        \"tenantUid\": \"6170cfcd-41c8-50e0-c5bc-15e7a2cff4fe\",\n        \"tenantEmail\": \"string\",\n        \"tenantPhone\": \"string\",\n        \"paymentsResults\": [\n          {\n            \"paymentUid\": \"5bb69407-e611-c69b-0e39-a139e86fd1a0\",\n            \"invoiceUid\": \"72e6e7c3-1b4c-d663-5083-1b23035e2b20\",\n            \"amount\": 4163.192527875682,\n            \"paidOn\": \"1969-01-03T19:12:50.031Z\",\n            \"depositedOn\": \"1954-12-10T07:36:37.835Z\",\n            \"paymentMode\": \"string\",\n            \"paymentStatus\": \"string\"\n          },\n          {\n            \"paymentUid\": \"763520f8-aee7-15cd-f1ed-a15ca475ee16\",\n            \"invoiceUid\": \"28f7f858-313d-ed75-bd63-46cbcafbb0c1\",\n            \"amount\": 5844.949132317475,\n            \"paidOn\": \"1963-06-21T07:25:57.485Z\",\n            \"depositedOn\": \"2025-08-01T00:23:29.646Z\",\n            \"paymentMode\": \"string\",\n            \"paymentStatus\": \"string\"\n          }\n        ],\n        \"totalPayment\": 7528.663011434139,\n        \"dueInYear\": 8254,\n        \"dueInMonth\": 7099,\n        \"leaseUid\": \"85fdeb83-4b0e-4d22-fcf0-a9b93d2df305\"\n      },\n      {\n        \"propertyUid\": \"776f2a67-8802-5315-6165-21f0ffbb92fb\",\n        \"propertyName\": \"string\",\n        \"propertyUnitUid\": \"8317a98b-5b98-5036-4a51-906dae1c6899\",\n        \"propertyUnitName\": \"string\",\n        \"tenantUid\": \"33130b2e-0256-0482-fb51-e730f97b7e06\",\n        \"tenantEmail\": \"string\",\n        \"tenantPhone\": \"string\",\n        \"paymentsResults\": [\n          {\n            \"paymentUid\": \"f3fb7b90-5df0-c5dd-6884-8f410657e156\",\n            \"invoiceUid\": \"55dfcfeb-1588-1e68-31a6-fb6cd9f34e4f\",\n            \"amount\": 9163.257898850163,\n            \"paidOn\": \"2021-11-05T03:40:58.046Z\",\n            \"depositedOn\": \"2009-05-10T00:49:53.557Z\",\n            \"paymentMode\": \"string\",\n            \"paymentStatus\": \"string\"\n          },\n          {\n            \"paymentUid\": \"0c1988cc-f2fb-ccf4-8e8e-ea7e9e4ebca9\",\n            \"invoiceUid\": \"2624a81e-56a0-3d4f-5af8-229e4599337a\",\n            \"amount\": 3907.701913421272,\n            \"paidOn\": \"2003-12-14T03:21:12.213Z\",\n            \"depositedOn\": \"1958-08-03T15:12:30.137Z\",\n            \"paymentMode\": \"string\",\n            \"paymentStatus\": \"string\"\n          }\n        ],\n        \"totalPayment\": 4161.165315429997,\n        \"dueInYear\": 1877,\n        \"dueInMonth\": 8879,\n        \"leaseUid\": \"f92b1b80-df43-552e-bd60-8363e5778cbf\"\n      }\n    ],\n    \"pagingModel\": {\n      \"pageSize\": 5435,\n      \"currentPage\": 7173,\n      \"pageCount\": 4235,\n      \"totalRecords\": 4759\n    }\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8728937-360e-41f8-96f2-35cbe8dadcd7",
+          "name": "Get payment by ID",
+          "request": {
+            "name": "Get payment by ID",
+            "description": {
+              "content": "Get payment information for given paymentUid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments",
+                ":paymentUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "paymentUid",
+                  "description": "(Required) The unique identifier of a payment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38649f01-23f7-4651-a7ac-c47476f71717",
+              "name": "Payment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "paymentUid",
+                      "description": "(Required) The unique identifier of a payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"paymentUid\": \"4e1b4630-6ce3-1283-39c3-f4c6cd4eb110\",\n    \"paymentDate\": \"1969-01-12T21:33:45.422Z\",\n    \"paymentMode\": \"string\",\n    \"paymentStatus\": \"string\",\n    \"paymentCategory\": \"string\",\n    \"amount\": 1352.69749974111,\n    \"payerId\": \"83ab5316-8f5f-ee75-96ec-cc331090d1cf\",\n    \"entityType\": \"string\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1527af81-b78e-4dec-bd2c-e1ee801db1a0",
+    "name": "Innago Expenses Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

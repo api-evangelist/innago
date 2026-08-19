@@ -1,0 +1,265 @@
+{
+  "item": [
+    {
+      "id": "94ee2ec8-7738-4c17-ad23-a176c65b278b",
+      "name": "External References",
+      "description": {
+        "content": "Map and manage external reference identifiers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "937442ae-0e21-4429-8624-007c446bf001",
+          "name": "Map Innago entities to external reference IDs",
+          "request": {
+            "name": "Map Innago entities to external reference IDs",
+            "description": {
+              "content": "Map the Innago entity with external reference id for different entity types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "map"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"entityType\": \"<string>\",\n    \"entityId\": \"<uuid>\",\n    \"externalReferenceId\": \"<uuid>\"\n  },\n  {\n    \"entityType\": \"<string>\",\n    \"entityId\": \"<uuid>\",\n    \"externalReferenceId\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be2d3b8b-3270-4d0c-b7b3-4eb30b20006f",
+              "name": "Mapping results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "map"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"entityType\": \"<string>\",\n    \"entityId\": \"<uuid>\",\n    \"externalReferenceId\": \"<uuid>\"\n  },\n  {\n    \"entityType\": \"<string>\",\n    \"entityId\": \"<uuid>\",\n    \"externalReferenceId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"mappingResults\": [\n      {\n        \"entityType\": \"string\",\n        \"entityId\": \"43d8610d-f645-517a-6668-5b70c13b8720\",\n        \"externalReferenceId\": \"2cf8a147-cc89-0715-ff32-272ad6f8aa37\",\n        \"status\": \"string\",\n        \"failureReason\": \"string\"\n      },\n      {\n        \"entityType\": \"string\",\n        \"entityId\": \"5c588b92-ed28-24d9-c15f-49745c590b2f\",\n        \"externalReferenceId\": \"ceb09bd9-db97-81dd-e696-fcdb9591feae\",\n        \"status\": \"string\",\n        \"failureReason\": \"string\"\n      }\n    ]\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88f3169f-a5ed-4710-be12-9452a1c9fa9d",
+          "name": "Record payment towards an external invoice",
+          "request": {
+            "name": "Record payment towards an external invoice",
+            "description": {
+              "content": "Record payment towards external invoice and tenant id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "externalreferences",
+                "invoices",
+                ":externalInvoiceUid",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "externalInvoiceUid",
+                  "description": "(Required) External invoiceId of the specific invoice"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalTenantGuid\": \"<uuid>\",\n  \"amount\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e27a395-0f37-4d2a-819f-e378cc94a2ba",
+              "name": "Payment recorded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "externalreferences",
+                    "invoices",
+                    ":externalInvoiceUid",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalInvoiceUid",
+                      "description": "(Required) External invoiceId of the specific invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalTenantGuid\": \"<uuid>\",\n  \"amount\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"message\": \"string\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "97f374e0-c9b9-417e-abe7-c3f5b734c688",
+    "name": "Innago Expenses External References API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

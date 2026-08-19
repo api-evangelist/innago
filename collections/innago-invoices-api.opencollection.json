@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses Invoices API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/invoices",
+            "params": [
+              {
+                "name": "leaseUid",
+                "value": "",
+                "type": "query",
+                "description": "leaseUid for which invoices need to be fetched"
+              },
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "query",
+                "description": "tenantUid for which invoices need to be fetched"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "PageNumber is the number of page requested"
+              }
+            ]
+          },
+          "docs": "Get all invoices for a PO based on lease id and tenant id."
+        },
+        {
+          "info": {
+            "name": "Create an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-my.innago.com/openapi/v1/invoices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an invoice for a specific tenant for a lease."
+        },
+        {
+          "info": {
+            "name": "Get an invoice by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/invoices/:invoiceUid",
+            "params": [
+              {
+                "name": "invoiceUid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an invoice"
+              }
+            ]
+          },
+          "docs": "Get an invoice based on invoice id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,406 @@
+{
+  "item": [
+    {
+      "id": "5e7d5693-a511-4729-ab9f-cb3bc4963a4c",
+      "name": "Maintenance",
+      "description": {
+        "content": "Manage maintenance tickets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fff0528b-1d1e-4a43-9f07-5747e985e429",
+          "name": "Get all maintenance tickets",
+          "request": {
+            "name": "Get all maintenance tickets",
+            "description": {
+              "content": "Get all maintenance tickets based on filters. IsUrgent filter should be applied for urgent maintenance tickets; if false, all maintenance tickets are returned as per other filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "maintenances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Statuses",
+                  "value": "<integer>",
+                  "description": "1=NewRequest, 2=OldRequest, 3=Resolved, 4=ReOpened"
+                },
+                {
+                  "disabled": false,
+                  "key": "Statuses",
+                  "value": "<integer>",
+                  "description": "1=NewRequest, 2=OldRequest, 3=Resolved, 4=ReOpened"
+                },
+                {
+                  "disabled": false,
+                  "key": "MaintenanceCategory",
+                  "value": "<integer>",
+                  "description": "1=Electrical, 2=Plumbing, 3=AC, 4=Heat, 5=Kitchen, 6=Appliance, 7=Other"
+                },
+                {
+                  "disabled": false,
+                  "key": "TenantUid",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "PropertyUid",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "IsUrgent",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "PageNumber",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d779f38a-62fe-40a2-9f58-f2001be632c6",
+              "name": "List of maintenance tickets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "maintenances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Statuses",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Statuses",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MaintenanceCategory",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "TenantUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "PropertyUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "IsUrgent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "PageNumber",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"resolvedMaintenanceCount\": 1021,\n    \"openMaintenanceCount\": 7740,\n    \"newMaintenanceCount\": 921,\n    \"totalRequestCount\": 4535,\n    \"maintenances\": [\n      {\n        \"maintenanceUid\": \"6ffd2784-ce5d-8c3d-21cf-cd65ad66f4dd\",\n        \"personName\": \"string\",\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"description\": \"string\",\n        \"dateSubmitted\": \"2015-09-01T18:01:22.822Z\",\n        \"dateResolved\": \"1946-08-15T16:31:15.041Z\",\n        \"isUrgent\": false,\n        \"property\": \"string\",\n        \"unit\": \"string\",\n        \"propertyAddress\": \"string\",\n        \"personUid\": \"49cfebd1-22ed-7b31-e808-e3077f96bef5\",\n        \"requestStatus\": \"string\"\n      },\n      {\n        \"maintenanceUid\": \"2af2769e-df5c-02c3-6746-224226abb811\",\n        \"personName\": \"string\",\n        \"name\": \"string\",\n        \"category\": \"string\",\n        \"description\": \"string\",\n        \"dateSubmitted\": \"1999-09-16T16:30:44.047Z\",\n        \"dateResolved\": \"1976-06-13T18:37:57.194Z\",\n        \"isUrgent\": true,\n        \"property\": \"string\",\n        \"unit\": \"string\",\n        \"propertyAddress\": \"string\",\n        \"personUid\": \"4eb552e0-ee0d-3c16-fe41-cfc4874bd9ce\",\n        \"requestStatus\": \"string\"\n      }\n    ],\n    \"isMaintenanceRequestOn\": true,\n    \"pagingModel\": {\n      \"pageSize\": 7989,\n      \"currentPage\": 6583,\n      \"pageCount\": 1113,\n      \"totalRecords\": 1378\n    }\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73c14fdf-f886-4b3e-9d60-039c4a5d6b3d",
+          "name": "Create a maintenance ticket",
+          "request": {
+            "name": "Create a maintenance ticket",
+            "description": {
+              "content": "Create a maintenance ticket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "maintenances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maintenanceTicketName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"selectedProperties\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"maintenanceCategory\": \"<integer>\",\n  \"isUrgent\": \"<boolean>\",\n  \"isNotifyTenant\": \"<boolean>\",\n  \"selectedPropertyUnits\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"tenantUid\": \"<uuid>\",\n  \"files\": [\n    {\n      \"fileName\": \"<string>\",\n      \"fileContent\": \"<byte>\"\n    },\n    {\n      \"fileName\": \"<string>\",\n      \"fileContent\": \"<byte>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "626d79f6-de44-4afb-9947-6135f632443b",
+              "name": "Maintenance ticket created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "maintenances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maintenanceTicketName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"selectedProperties\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"maintenanceCategory\": \"<integer>\",\n  \"isUrgent\": \"<boolean>\",\n  \"isNotifyTenant\": \"<boolean>\",\n  \"selectedPropertyUnits\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"tenantUid\": \"<uuid>\",\n  \"files\": [\n    {\n      \"fileName\": \"<string>\",\n      \"fileContent\": \"<byte>\"\n    },\n    {\n      \"fileName\": \"<string>\",\n      \"fileContent\": \"<byte>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"message\": \"string\",\n    \"maintenanceUid\": \"daef0bac-320d-7827-8ec1-535b5913e665\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77e2ef77-af35-4c78-bbd5-034511586556",
+          "name": "Resolve or reopen a maintenance ticket",
+          "request": {
+            "name": "Resolve or reopen a maintenance ticket",
+            "description": {
+              "content": "To resolve or reopen a maintenance ticket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "maintenances",
+                ":maintenanceUid",
+                "status",
+                ":maintenanceStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "maintenanceUid",
+                  "description": "(Required) The unique identifier for the maintenance ticket"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "maintenanceStatus",
+                  "description": "(Required) 111=Resolved, 113=ReOpened"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74a322f7-743d-4e02-9cfa-1436f184ef63",
+              "name": "Status updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "maintenances",
+                    ":maintenanceUid",
+                    "status",
+                    ":maintenanceStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "maintenanceUid",
+                      "description": "(Required) The unique identifier for the maintenance ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "maintenanceStatus",
+                      "description": "(Required) 111=Resolved, 113=ReOpened"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"message\": \"string\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c6d39e3c-198d-49df-9e46-c7ad8ca8145c",
+    "name": "Innago Expenses Maintenance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

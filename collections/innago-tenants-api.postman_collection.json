@@ -1,0 +1,231 @@
+{
+  "item": [
+    {
+      "id": "25bb5501-5eb4-4eec-970f-3e6d9ffd5aba",
+      "name": "Tenants",
+      "description": {
+        "content": "Manage tenant information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a77475d-9cfc-42cf-8a37-a826fa30268c",
+          "name": "Get all tenants for a lease",
+          "request": {
+            "name": "Get all tenants for a lease",
+            "description": {
+              "content": "Get all tenants for a PO based on lease id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "leaseUid",
+                  "value": "<uuid>",
+                  "description": "Unique Guid Identifier for a lease"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c56c5f4-dc14-4748-888a-d14c049c3644",
+              "name": "List of tenants",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "leaseUid",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"userShortInfoModel\": [\n      {\n        \"userUid\": \"000a9ffd-e6e0-0126-1f28-b15cc257f5f6\",\n        \"userFirstName\": \"string\",\n        \"userLastName\": \"string\",\n        \"userEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"userRole\": \"string\",\n        \"entityType\": \"string\"\n      },\n      {\n        \"userUid\": \"9c3ba109-2f78-1931-3070-013a07f93c6d\",\n        \"userFirstName\": \"string\",\n        \"userLastName\": \"string\",\n        \"userEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"userRole\": \"string\",\n        \"entityType\": \"string\"\n      }\n    ]\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf5018d5-dea9-4ce3-b635-95f3b078d56a",
+          "name": "Get a tenant by ID",
+          "request": {
+            "name": "Get a tenant by ID",
+            "description": {
+              "content": "Get a tenant based on tenant id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tenants",
+                ":tenantUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "tenantUid",
+                  "description": "(Required) The unique identifier of a tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84058d3e-c772-4884-89fa-fd6cf0b0eb0d",
+              "name": "Tenant details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tenants",
+                    ":tenantUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "tenantUid",
+                      "description": "(Required) The unique identifier of a tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"userUid\": \"0129c26f-8c44-dee4-feb2-1b6792439650\",\n    \"userFirstName\": \"string\",\n    \"userLastName\": \"string\",\n    \"userEmail\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"userRole\": \"string\",\n    \"entityType\": \"string\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b1efae83-61b1-4075-99d0-8609a052aa7d",
+    "name": "Innago Expenses Tenants API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

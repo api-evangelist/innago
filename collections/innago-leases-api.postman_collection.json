@@ -1,0 +1,248 @@
+{
+  "item": [
+    {
+      "id": "eee83795-0f51-4a47-85e7-b70b0f54a5a3",
+      "name": "Leases",
+      "description": {
+        "content": "Manage lease agreements",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aebe097d-619b-4909-8e71-7e263ee4186b",
+          "name": "Get all leases",
+          "request": {
+            "name": "Get all leases",
+            "description": {
+              "content": "Get all leases by propertyId or unitId passed in query string.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "leases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "propertyUid",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "unitUid",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6438a78-4dfa-48ed-9c7e-429c50c68283",
+              "name": "List of leases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "propertyUid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "unitUid",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"list\": [\n      {\n        \"leaseUid\": \"4f879e0d-7edd-d391-ef97-c4e26a5d0641\",\n        \"startDate\": \"1980-09-04T02:56:05.913Z\",\n        \"endDate\": \"1947-08-30T06:15:47.343Z\",\n        \"propertyName\": \"string\",\n        \"propertyAddress\": \"string\",\n        \"propertyUnitName\": \"string\",\n        \"rentAmount\": 6132.370552518282,\n        \"depositAmount\": 2886.6484243881196,\n        \"dueOn\": 844,\n        \"paymentFrequency\": \"string\",\n        \"isActiveLease\": true,\n        \"isExpiredLease\": false,\n        \"isExpiringLease\": false,\n        \"isFutureLease\": false,\n        \"isListingArchived\": false,\n        \"noOfTenants\": 7840,\n        \"tenants\": [\n          {\n            \"tenantUid\": \"cf0ca7a6-204c-c8bf-c8bc-e9428a8d8eda\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"email\": \"string\",\n            \"phone\": \"string\"\n          },\n          {\n            \"tenantUid\": \"99fa5042-477b-4e33-63a5-27762b737194\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"email\": \"string\",\n            \"phone\": \"string\"\n          }\n        ]\n      },\n      {\n        \"leaseUid\": \"c31a794b-38c8-8c52-277c-8ca56064d6bd\",\n        \"startDate\": \"1973-11-12T23:21:58.789Z\",\n        \"endDate\": \"1998-09-19T10:57:36.868Z\",\n        \"propertyName\": \"string\",\n        \"propertyAddress\": \"string\",\n        \"propertyUnitName\": \"string\",\n        \"rentAmount\": 9195.53095533279,\n        \"depositAmount\": 4939.862694762762,\n        \"dueOn\": 3242,\n        \"paymentFrequency\": \"string\",\n        \"isActiveLease\": false,\n        \"isExpiredLease\": false,\n        \"isExpiringLease\": true,\n        \"isFutureLease\": false,\n        \"isListingArchived\": true,\n        \"noOfTenants\": 6230,\n        \"tenants\": [\n          {\n            \"tenantUid\": \"8f11839d-96ec-f111-304f-9138aac16f88\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"email\": \"string\",\n            \"phone\": \"string\"\n          },\n          {\n            \"tenantUid\": \"2e6bb45d-fc78-cf45-f286-04a9e7883d11\",\n            \"firstName\": \"string\",\n            \"lastName\": \"string\",\n            \"email\": \"string\",\n            \"phone\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"paging\": {\n      \"pageSize\": 7359,\n      \"currentPage\": 4488,\n      \"pageCount\": 4670,\n      \"totalRecords\": 3909\n    }\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a81884e0-2428-46e4-ae7a-64b0653f9778",
+          "name": "Get specific lease details",
+          "request": {
+            "name": "Get specific lease details",
+            "description": {
+              "content": "Get specific lease details by RentalRequestId (leaseUid).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "leases",
+                ":leaseUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "leaseUid",
+                  "description": "(Required) Unique Guid Identifier for a lease"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f253eaf2-0159-4ef1-932d-189ee2fe3fa4",
+              "name": "Lease details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leases",
+                    ":leaseUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "leaseUid",
+                      "description": "(Required) Unique Guid Identifier for a lease"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"leaseUid\": \"d7664d0a-22f5-608b-19a8-e2824e8805cc\",\n    \"startDate\": \"2015-03-08T02:51:12.333Z\",\n    \"endDate\": \"1947-04-28T15:28:31.618Z\",\n    \"propertyName\": \"string\",\n    \"propertyAddress\": \"string\",\n    \"propertyUnitName\": \"string\",\n    \"rentAmount\": 3619.041465490662,\n    \"depositAmount\": 8751.123452929414,\n    \"dueOn\": 1078,\n    \"paymentFrequency\": \"string\",\n    \"isActiveLease\": false,\n    \"isExpiredLease\": false,\n    \"isExpiringLease\": false,\n    \"isFutureLease\": false,\n    \"isListingArchived\": true,\n    \"noOfTenants\": 7878,\n    \"tenants\": [\n      {\n        \"tenantUid\": \"7d5c0f7b-7a1b-1022-73ce-cd7ad9279dee\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"email\": \"string\",\n        \"phone\": \"string\"\n      },\n      {\n        \"tenantUid\": \"eda19f12-a2ae-675b-1c02-0ee4842730db\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"email\": \"string\",\n        \"phone\": \"string\"\n      }\n    ],\n    \"listingFrequency\": \"string\"\n  },\n  \"error\": {\n    \"errorMessage\": \"string\",\n    \"errorCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-my.innago.com/openapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ace75799-b5f9-4324-92b5-d6a2b27b8d5d",
+    "name": "Innago Expenses Leases API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.\n\nContact Support:\n Name: Innago Support\n Email: support@innago.com",
+      "type": "text/plain"
+    }
+  }
+}

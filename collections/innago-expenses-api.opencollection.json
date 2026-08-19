@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Expenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all expenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-my.innago.com/openapi/v1/expenses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get the expenses for the PO. PO will be identified from the Token Claims."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

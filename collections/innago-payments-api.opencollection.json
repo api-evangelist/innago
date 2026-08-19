@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses Payments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Record payment towards an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-my.innago.com/openapi/v1/invoices/:invoiceUid/payments",
+            "params": [
+              {
+                "name": "invoiceUid",
+                "value": "",
+                "type": "path",
+                "description": "invoiceId should be the Id of specific invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record payment towards invoice of a tenant."
+        },
+        {
+          "info": {
+            "name": "Get all payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/payments",
+            "params": [
+              {
+                "name": "DueInMonth",
+                "value": "",
+                "type": "query",
+                "description": "The month in which requested payment was due"
+              },
+              {
+                "name": "DueInYear",
+                "value": "",
+                "type": "query",
+                "description": "The year in which requested payment was due"
+              },
+              {
+                "name": "PropertyUid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "PropertyUnitUid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "TenantUid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "PageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all payments based on filter. DueInMonth and DueInYear are mandatory. PropertyUid is mandatory for PropertyUnitUid. PropertyUid and PropertyUnitUid are mandatory for TenantUid."
+        },
+        {
+          "info": {
+            "name": "Get payment by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/payments/:paymentUid",
+            "params": [
+              {
+                "name": "paymentUid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a payment"
+              }
+            ]
+          },
+          "docs": "Get payment information for given paymentUid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

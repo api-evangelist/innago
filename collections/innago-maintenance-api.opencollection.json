@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses Maintenance API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Maintenance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all maintenance tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v2/maintenances",
+            "params": [
+              {
+                "name": "Statuses",
+                "value": "",
+                "type": "query",
+                "description": "1=NewRequest, 2=OldRequest, 3=Resolved, 4=ReOpened"
+              },
+              {
+                "name": "MaintenanceCategory",
+                "value": "",
+                "type": "query",
+                "description": "1=Electrical, 2=Plumbing, 3=AC, 4=Heat, 5=Kitchen, 6=Appliance, 7=Other"
+              },
+              {
+                "name": "TenantUid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "PropertyUid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "IsUrgent",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "PageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all maintenance tickets based on filters. IsUrgent filter should be applied for urgent maintenance tickets; if false, all maintenance tickets are returned as per other filters."
+        },
+        {
+          "info": {
+            "name": "Create a maintenance ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-my.innago.com/openapi/v2/maintenances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a maintenance ticket."
+        },
+        {
+          "info": {
+            "name": "Resolve or reopen a maintenance ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-my.innago.com/openapi/v2/maintenances/:maintenanceUid/status/:maintenanceStatus",
+            "params": [
+              {
+                "name": "maintenanceUid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the maintenance ticket"
+              },
+              {
+                "name": "maintenanceStatus",
+                "value": "",
+                "type": "path",
+                "description": "111=Resolved, 113=ReOpened"
+              }
+            ]
+          },
+          "docs": "To resolve or reopen a maintenance ticket."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

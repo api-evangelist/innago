@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Innago Expenses Leases API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all leases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/leases",
+            "params": [
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "propertyUid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unitUid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all leases by propertyId or unitId passed in query string."
+        },
+        {
+          "info": {
+            "name": "Get specific lease details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-my.innago.com/openapi/v1/leases/:leaseUid",
+            "params": [
+              {
+                "name": "leaseUid",
+                "value": "",
+                "type": "path",
+                "description": "Unique Guid Identifier for a lease"
+              }
+            ]
+          },
+          "docs": "Get specific lease details by RentalRequestId (leaseUid)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
