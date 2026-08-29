@@ -371,6 +371,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/innago/refs/heads/main/finops/finops.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/innago-capability-edges.yml
+    name: Innago Business Capability Map
   - type: AgenticAccess
     url: agentic-access/innago-agentic-access.yml
   - type: DomainSecurity
