@@ -1,15 +1,7 @@
 {
   "provider": "innago",
   "sources": [
-    "innago-expenses-api-openapi.yml",
-    "innago-external-references-api-openapi.yml",
-    "innago-health-api-openapi.yml",
-    "innago-invoices-api-openapi.yml",
-    "innago-leases-api-openapi.yml",
-    "innago-maintenance-api-openapi.yml",
-    "innago-payments-api-openapi.yml",
-    "innago-properties-api-openapi.yml",
-    "innago-tenants-api-openapi.yml"
+    "_original/openapi.yml"
   ],
   "outputs": [
     "innago-expenses-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "innago-expenses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-external-references-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-leases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-maintenance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-properties-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "innago-tenants-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

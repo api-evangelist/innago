@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Innago Expenses External References API
+  title: Innago External References API
   description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
   version: v1
   contact:
@@ -68,6 +68,52 @@ paths:
                 $ref: '#/components/schemas/MessageResponseModelResponse'
 components:
   schemas:
+    RecordReferencePaymentRequestModel:
+      type: object
+      properties:
+        externalTenantGuid:
+          type: string
+          format: uuid
+          description: External Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
+    ExternalReferenceMappingRequest:
+      type: array
+      items:
+        type: object
+        properties:
+          entityType:
+            type: string
+            description: Property, PropertyUnit, Lease, Tenant
+          entityId:
+            type: string
+            format: uuid
+          externalReferenceId:
+            type: string
+            format: uuid
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     ExternalReferenceMappingResponse:
       type: object
       properties:
@@ -91,50 +137,6 @@ components:
                     type: string
                   failureReason:
                     type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-          nullable: true
-        errorCode:
-          type: string
-          nullable: true
-    ExternalReferenceMappingRequest:
-      type: array
-      items:
-        type: object
-        properties:
-          entityType:
-            type: string
-            description: Property, PropertyUnit, Lease, Tenant
-          entityId:
-            type: string
-            format: uuid
-          externalReferenceId:
-            type: string
-            format: uuid
-    RecordReferencePaymentRequestModel:
-      type: object
-      properties:
-        externalTenantGuid:
-          type: string
-          format: uuid
-          description: External Id of Tenant
-        amount:
-          type: number
-          format: double
-          description: Amount Paid
-    MessageResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
         error:
           $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Innago Expenses Payments API
+  title: Innago Payments API
   description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
   version: v1
   contact:
@@ -116,32 +116,6 @@ paths:
                 $ref: '#/components/schemas/PaymentInfoResponseModelResponse'
 components:
   schemas:
-    PaymentInfoModel:
-      type: object
-      properties:
-        paymentUid:
-          type: string
-          format: uuid
-        paymentDate:
-          type: string
-          format: date-time
-        paymentMode:
-          type: string
-          description: online, offline
-        paymentStatus:
-          type: string
-          description: Pending, Paid, Rejected, Reversed
-        paymentCategory:
-          type: string
-          description: Invoice, Applicant, Reversal
-        amount:
-          type: number
-          format: double
-        payerId:
-          type: string
-          format: uuid
-        entityType:
-          type: string
     PaymentTransactionModel:
       type: object
       properties:
@@ -186,11 +160,64 @@ components:
       type: object
       properties:
         errorMessage:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         errorCode:
+          type:
+          - string
+          - 'null'
+    RecordPaymentRequestModel:
+      type: object
+      required:
+      - tenantUid
+      - amount
+      properties:
+        tenantUid:
           type: string
-          nullable: true
+          format: uuid
+          description: Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    PaymentInfoModel:
+      type: object
+      properties:
+        paymentUid:
+          type: string
+          format: uuid
+        paymentDate:
+          type: string
+          format: date-time
+        paymentMode:
+          type: string
+          description: online, offline
+        paymentStatus:
+          type: string
+          description: Pending, Paid, Rejected, Reversed
+        paymentCategory:
+          type: string
+          description: Invoice, Applicant, Reversal
+        amount:
+          type: number
+          format: double
+        payerId:
+          type: string
+          format: uuid
+        entityType:
+          type: string
     PaymentWithAdditionalInfoResponse:
       type: object
       properties:
@@ -239,31 +266,6 @@ components:
               $ref: '#/components/schemas/PagingModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    RecordPaymentRequestModel:
-      type: object
-      required:
-      - tenantUid
-      - amount
-      properties:
-        tenantUid:
-          type: string
-          format: uuid
-          description: Id of Tenant
-        amount:
-          type: number
-          format: double
-          description: Amount Paid
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
   securitySchemes:
     BearerAuth:
       type: http

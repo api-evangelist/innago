@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Innago Expenses Maintenance API
+  title: Innago Maintenance API
   description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
   version: v1
   contact:
@@ -186,6 +186,62 @@ components:
           items:
             $ref: '#/components/schemas/FileModel'
           description: Attachments, max 10 files, 20MB each
+    MaintenanceTicketModel:
+      type: object
+      properties:
+        maintenanceUid:
+          type: string
+          format: uuid
+        personName:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        dateSubmitted:
+          type: string
+          format: date-time
+        dateResolved:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isUrgent:
+          type: boolean
+        property:
+          type: string
+        unit:
+          type: string
+        propertyAddress:
+          type: string
+        personUid:
+          type: string
+          format: uuid
+        requestStatus:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     MaintenanceListResponseModelResponse:
       type: object
       properties:
@@ -223,15 +279,6 @@ components:
               format: uuid
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-          nullable: true
-        errorCode:
-          type: string
-          nullable: true
     FileModel:
       type: object
       properties:
@@ -240,16 +287,6 @@ components:
         fileContent:
           type: string
           format: byte
-    MessageResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     PagingModel:
       type: object
       properties:
@@ -261,40 +298,6 @@ components:
           type: integer
         totalRecords:
           type: integer
-    MaintenanceTicketModel:
-      type: object
-      properties:
-        maintenanceUid:
-          type: string
-          format: uuid
-        personName:
-          type: string
-        name:
-          type: string
-        category:
-          type: string
-        description:
-          type: string
-        dateSubmitted:
-          type: string
-          format: date-time
-        dateResolved:
-          type: string
-          format: date-time
-          nullable: true
-        isUrgent:
-          type: boolean
-        property:
-          type: string
-        unit:
-          type: string
-        propertyAddress:
-          type: string
-        personUid:
-          type: string
-          format: uuid
-        requestStatus:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

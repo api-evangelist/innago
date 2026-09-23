@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Innago Expenses Invoices API
+  title: Innago Invoices API
   description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
   version: v1
   contact:
@@ -93,49 +93,6 @@ paths:
                 $ref: '#/components/schemas/InvoiceShortInfoResponseModelResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-          nullable: true
-        errorCode:
-          type: string
-          nullable: true
-    InvoiceShortInfoListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            invoiceShortInfoResponseModel:
-              type: array
-              items:
-                $ref: '#/components/schemas/InvoiceShortInfoModel'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    InvoiceShortInfoModel:
-      type: object
-      properties:
-        invoiceNumber:
-          type: integer
-          format: int64
-        invoiceUid:
-          type: string
-          format: uuid
-        invoiceDueDate:
-          type: string
-          format: date-time
-        invoiceStatus:
-          type: string
-          description: Pending, Fully Paid, Partially Paid
-        amount:
-          type: number
-          format: double
-        entityType:
-          type: string
     CreateInvoiceModel:
       type: object
       required:
@@ -158,17 +115,31 @@ components:
         dueDate:
           type: string
           format: date-time
-    PagingModel:
+    ErrorResponse:
       type: object
       properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    InvoiceShortInfoListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            invoiceShortInfoResponseModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/InvoiceShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     CreateInvoiceResponseModelResponse:
       type: object
       properties:
@@ -180,6 +151,37 @@ components:
               format: uuid
         error:
           $ref: '#/components/schemas/ErrorResponse'
+    InvoiceShortInfoModel:
+      type: object
+      properties:
+        invoiceNumber:
+          type: integer
+          format: int64
+        invoiceUid:
+          type: string
+          format: uuid
+        invoiceDueDate:
+          type: string
+          format: date-time
+        invoiceStatus:
+          type: string
+          description: Pending, Fully Paid, Partially Paid
+        amount:
+          type: number
+          format: double
+        entityType:
+          type: string
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
     InvoiceShortInfoResponseModelResponse:
       type: object
       properties:

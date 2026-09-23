@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Innago Expenses Leases API
+  title: Innago Leases API
   description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
   version: v1
   contact:
@@ -101,11 +101,38 @@ components:
       type: object
       properties:
         errorMessage:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         errorCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    LeaseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaseModel'
+            paging:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     LeaseModel:
       type: object
       properties:
@@ -150,31 +177,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TenantShortModel'
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
-    LeaseListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            list:
-              type: array
-              items:
-                $ref: '#/components/schemas/LeaseModel'
-            paging:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

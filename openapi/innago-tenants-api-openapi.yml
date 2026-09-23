@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Innago Expenses Tenants API
+  title: Innago Tenants API
   description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
   version: v1
   contact:
@@ -63,13 +63,6 @@ paths:
                 $ref: '#/components/schemas/UserShortInfoResponseModelResponse'
 components:
   schemas:
-    UserShortInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/UserShortInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     UserShortInfoListResponseResponse:
       type: object
       properties:
@@ -82,15 +75,6 @@ components:
                 $ref: '#/components/schemas/UserShortInfoModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-          nullable: true
-        errorCode:
-          type: string
-          nullable: true
     UserShortInfoModel:
       type: object
       properties:
@@ -98,25 +82,49 @@ components:
           type: string
           format: uuid
         userFirstName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         userLastName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         userEmail:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         phoneNumber:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         userRole:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: PO, Tenant, Applicant, etc.
         entityType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Property, PropertyUnit, Lease, Tenant, Invoice, Payment, Maintenance, or Applicant
+    UserShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
   securitySchemes:
     BearerAuth:
       type: http

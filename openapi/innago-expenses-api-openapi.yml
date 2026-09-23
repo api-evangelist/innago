@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Innago Expenses API
   description: REST API for Innago property management platform enabling programmatic access to properties, units, tenants, leases, invoices, payments, expenses, and maintenance tickets. Authentication uses Bearer token and API key headers.
@@ -40,22 +40,33 @@ paths:
                 $ref: '#/components/schemas/ExpenseListResponseModelResponse'
 components:
   schemas:
-    ExpenseListResponseModelResponse:
+    GetAllExpensesByFilterRequestModel:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            expenseListModel:
-              type: array
-              items:
-                $ref: '#/components/schemas/ExpenseShortInfoModel'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-            totalRecords:
-              type: integer
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        dateFrom:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTo:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyUids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        propertyUnitUids:
+          type: array
+          items:
+            type: string
+            format: uuid
     ExpenseShortInfoModel:
       type: object
       properties:
@@ -93,40 +104,33 @@ components:
         propertyUnitUid:
           type: string
           format: uuid
-    GetAllExpensesByFilterRequestModel:
+    ExpenseListResponseModelResponse:
       type: object
       properties:
-        pageNumber:
-          type: integer
-        pageSize:
-          type: integer
-        dateFrom:
-          type: string
-          format: date-time
-          nullable: true
-        dateTo:
-          type: string
-          format: date-time
-          nullable: true
-        propertyUids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        propertyUnitUids:
-          type: array
-          items:
-            type: string
-            format: uuid
+        data:
+          type: object
+          properties:
+            expenseListModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExpenseShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+            totalRecords:
+              type: integer
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     ErrorResponse:
       type: object
       properties:
         errorMessage:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         errorCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
     PagingModel:
       type: object
       properties:
