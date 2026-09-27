@@ -40,33 +40,17 @@ paths:
                 $ref: '#/components/schemas/ExpenseListResponseModelResponse'
 components:
   schemas:
-    GetAllExpensesByFilterRequestModel:
+    PagingModel:
       type: object
       properties:
-        pageNumber:
-          type: integer
         pageSize:
           type: integer
-        dateFrom:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dateTo:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        propertyUids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        propertyUnitUids:
-          type: array
-          items:
-            type: string
-            format: uuid
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
     ExpenseShortInfoModel:
       type: object
       properties:
@@ -104,6 +88,44 @@ components:
         propertyUnitUid:
           type: string
           format: uuid
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    GetAllExpensesByFilterRequestModel:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        dateFrom:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTo:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyUids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        propertyUnitUids:
+          type: array
+          items:
+            type: string
+            format: uuid
     ExpenseListResponseModelResponse:
       type: object
       properties:
@@ -120,28 +142,6 @@ components:
               type: integer
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
   securitySchemes:
     BearerAuth:
       type: http

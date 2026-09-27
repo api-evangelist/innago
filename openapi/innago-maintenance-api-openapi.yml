@@ -130,6 +130,27 @@ paths:
                 $ref: '#/components/schemas/MessageResponseModelResponse'
 components:
   schemas:
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     MaintenanceRequestModel:
       type: object
       required:
@@ -186,6 +207,62 @@ components:
           items:
             $ref: '#/components/schemas/FileModel'
           description: Attachments, max 10 files, 20MB each
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    MaintenanceListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            resolvedMaintenanceCount:
+              type: integer
+            openMaintenanceCount:
+              type: integer
+            newMaintenanceCount:
+              type: integer
+            totalRequestCount:
+              type: integer
+            maintenances:
+              type: array
+              items:
+                $ref: '#/components/schemas/MaintenanceTicketModel'
+            isMaintenanceRequestOn:
+              type: boolean
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    FileModel:
+      type: object
+      properties:
+        fileName:
+          type: string
+        fileContent:
+          type: string
+          format: byte
+    CreateMaintenanceResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+            maintenanceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     MaintenanceTicketModel:
       type: object
       properties:
@@ -221,83 +298,6 @@ components:
           format: uuid
         requestStatus:
           type: string
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    MessageResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    MaintenanceListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            resolvedMaintenanceCount:
-              type: integer
-            openMaintenanceCount:
-              type: integer
-            newMaintenanceCount:
-              type: integer
-            totalRequestCount:
-              type: integer
-            maintenances:
-              type: array
-              items:
-                $ref: '#/components/schemas/MaintenanceTicketModel'
-            isMaintenanceRequestOn:
-              type: boolean
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    CreateMaintenanceResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-            maintenanceUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    FileModel:
-      type: object
-      properties:
-        fileName:
-          type: string
-        fileContent:
-          type: string
-          format: byte
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
   securitySchemes:
     BearerAuth:
       type: http

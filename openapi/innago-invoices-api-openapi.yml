@@ -93,28 +93,35 @@ paths:
                 $ref: '#/components/schemas/InvoiceShortInfoResponseModelResponse'
 components:
   schemas:
-    CreateInvoiceModel:
+    PagingModel:
       type: object
-      required:
-      - tenantUid
-      - leaseUid
-      - amount
-      - dueDate
       properties:
-        tenantUid:
-          type: string
-          format: uuid
-        leaseUid:
-          type: string
-          format: uuid
-        amount:
-          type: number
-          format: double
-        item:
-          type: string
-        dueDate:
-          type: string
-          format: date-time
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    InvoiceShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InvoiceShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    CreateInvoiceResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            invoiceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     ErrorResponse:
       type: object
       properties:
@@ -140,17 +147,28 @@ components:
               $ref: '#/components/schemas/PagingModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    CreateInvoiceResponseModelResponse:
+    CreateInvoiceModel:
       type: object
+      required:
+      - tenantUid
+      - leaseUid
+      - amount
+      - dueDate
       properties:
-        data:
-          type: object
-          properties:
-            invoiceUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+        tenantUid:
+          type: string
+          format: uuid
+        leaseUid:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        item:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
     InvoiceShortInfoModel:
       type: object
       properties:
@@ -171,24 +189,6 @@ components:
           format: double
         entityType:
           type: string
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
-    InvoiceShortInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/InvoiceShortInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

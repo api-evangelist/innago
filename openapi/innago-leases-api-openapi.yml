@@ -71,6 +71,17 @@ paths:
                 $ref: '#/components/schemas/FinalLeaseDetailModelResponse'
 components:
   schemas:
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
     TenantShortModel:
       type: object
       properties:
@@ -108,31 +119,6 @@ components:
           type:
           - string
           - 'null'
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
-    LeaseListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            list:
-              type: array
-              items:
-                $ref: '#/components/schemas/LeaseModel'
-            paging:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     LeaseModel:
       type: object
       properties:
@@ -177,6 +163,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TenantShortModel'
+    LeaseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaseModel'
+            paging:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

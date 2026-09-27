@@ -63,6 +63,24 @@ paths:
                 $ref: '#/components/schemas/UserShortInfoResponseModelResponse'
 components:
   schemas:
+    UserShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
     UserShortInfoListResponseResponse:
       type: object
       properties:
@@ -107,24 +125,6 @@ components:
           - string
           - 'null'
           description: Property, PropertyUnit, Lease, Tenant, Invoice, Payment, Maintenance, or Applicant
-    UserShortInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/UserShortInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     BearerAuth:
       type: http

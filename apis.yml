@@ -37,7 +37,7 @@ modified: '2026-09-16'
 specificationVersion: '0.23'
 tags:
 - Property Management
-- Real-Estate
+- Real Estate
 - Leases
 - Rent Collection
 - Maintenance
@@ -53,6 +53,7 @@ tags_raw:
 - Tenants
 - Invoicing
 - Payments
+- Real-Estate
 apis:
 - aid: innago:innago-expenses-api
   name: Innago Expenses API

@@ -68,31 +68,16 @@ paths:
                 $ref: '#/components/schemas/MessageResponseModelResponse'
 components:
   schemas:
-    RecordReferencePaymentRequestModel:
+    MessageResponseModelResponse:
       type: object
       properties:
-        externalTenantGuid:
-          type: string
-          format: uuid
-          description: External Id of Tenant
-        amount:
-          type: number
-          format: double
-          description: Amount Paid
-    ExternalReferenceMappingRequest:
-      type: array
-      items:
-        type: object
-        properties:
-          entityType:
-            type: string
-            description: Property, PropertyUnit, Lease, Tenant
-          entityId:
-            type: string
-            format: uuid
-          externalReferenceId:
-            type: string
-            format: uuid
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     ErrorResponse:
       type: object
       properties:
@@ -104,16 +89,17 @@ components:
           type:
           - string
           - 'null'
-    MessageResponseModelResponse:
+    RecordReferencePaymentRequestModel:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+        externalTenantGuid:
+          type: string
+          format: uuid
+          description: External Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
     ExternalReferenceMappingResponse:
       type: object
       properties:
@@ -139,6 +125,20 @@ components:
                     type: string
         error:
           $ref: '#/components/schemas/ErrorResponse'
+    ExternalReferenceMappingRequest:
+      type: array
+      items:
+        type: object
+        properties:
+          entityType:
+            type: string
+            description: Property, PropertyUnit, Lease, Tenant
+          entityId:
+            type: string
+            format: uuid
+          externalReferenceId:
+            type: string
+            format: uuid
   securitySchemes:
     BearerAuth:
       type: http

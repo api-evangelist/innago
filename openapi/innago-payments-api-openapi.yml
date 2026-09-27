@@ -116,71 +116,6 @@ paths:
                 $ref: '#/components/schemas/PaymentInfoResponseModelResponse'
 components:
   schemas:
-    PaymentTransactionModel:
-      type: object
-      properties:
-        paymentUid:
-          type: string
-          format: uuid
-        invoiceUid:
-          type: string
-          format: uuid
-        amount:
-          type: number
-          format: double
-        paidOn:
-          type: string
-          format: date-time
-        depositedOn:
-          type: string
-          format: date-time
-        paymentMode:
-          type: string
-        paymentStatus:
-          type: string
-    PaymentInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PaymentInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    RecordPaymentResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            paymentUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    RecordPaymentRequestModel:
-      type: object
-      required:
-      - tenantUid
-      - amount
-      properties:
-        tenantUid:
-          type: string
-          format: uuid
-          description: Id of Tenant
-        amount:
-          type: number
-          format: double
-          description: Amount Paid
     PagingModel:
       type: object
       properties:
@@ -218,6 +153,49 @@ components:
           format: uuid
         entityType:
           type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    PaymentWithAdditionalInfoListResponseResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            paymentWithAdditionalInfoResponses:
+              type: array
+              items:
+                $ref: '#/components/schemas/PaymentWithAdditionalInfoResponse'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PaymentInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    RecordPaymentResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            paymentUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     PaymentWithAdditionalInfoResponse:
       type: object
       properties:
@@ -252,20 +230,42 @@ components:
         leaseUid:
           type: string
           format: uuid
-    PaymentWithAdditionalInfoListResponseResponse:
+    PaymentTransactionModel:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            paymentWithAdditionalInfoResponses:
-              type: array
-              items:
-                $ref: '#/components/schemas/PaymentWithAdditionalInfoResponse'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+        paymentUid:
+          type: string
+          format: uuid
+        invoiceUid:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        paidOn:
+          type: string
+          format: date-time
+        depositedOn:
+          type: string
+          format: date-time
+        paymentMode:
+          type: string
+        paymentStatus:
+          type: string
+    RecordPaymentRequestModel:
+      type: object
+      required:
+      - tenantUid
+      - amount
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+          description: Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
   securitySchemes:
     BearerAuth:
       type: http
