@@ -93,17 +93,6 @@ paths:
                 $ref: '#/components/schemas/InvoiceShortInfoResponseModelResponse'
 components:
   schemas:
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
     InvoiceShortInfoResponseModelResponse:
       type: object
       properties:
@@ -122,6 +111,37 @@ components:
               format: uuid
         error:
           $ref: '#/components/schemas/ErrorResponse'
+    InvoiceShortInfoModel:
+      type: object
+      properties:
+        invoiceNumber:
+          type: integer
+          format: int64
+        invoiceUid:
+          type: string
+          format: uuid
+        invoiceDueDate:
+          type: string
+          format: date-time
+        invoiceStatus:
+          type: string
+          description: Pending, Fully Paid, Partially Paid
+        amount:
+          type: number
+          format: double
+        entityType:
+          type: string
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
     ErrorResponse:
       type: object
       properties:
@@ -169,26 +189,6 @@ components:
         dueDate:
           type: string
           format: date-time
-    InvoiceShortInfoModel:
-      type: object
-      properties:
-        invoiceNumber:
-          type: integer
-          format: int64
-        invoiceUid:
-          type: string
-          format: uuid
-        invoiceDueDate:
-          type: string
-          format: date-time
-        invoiceStatus:
-          type: string
-          description: Pending, Fully Paid, Partially Paid
-        amount:
-          type: number
-          format: double
-        entityType:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

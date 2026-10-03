@@ -40,17 +40,6 @@ paths:
                 $ref: '#/components/schemas/ExpenseListResponseModelResponse'
 components:
   schemas:
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
     ExpenseShortInfoModel:
       type: object
       properties:
@@ -88,17 +77,6 @@ components:
         propertyUnitUid:
           type: string
           format: uuid
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
     GetAllExpensesByFilterRequestModel:
       type: object
       properties:
@@ -126,6 +104,17 @@ components:
           items:
             type: string
             format: uuid
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
     ExpenseListResponseModelResponse:
       type: object
       properties:
@@ -142,6 +131,17 @@ components:
               type: integer
         error:
           $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
   securitySchemes:
     BearerAuth:
       type: http

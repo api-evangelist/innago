@@ -130,6 +130,53 @@ paths:
                 $ref: '#/components/schemas/MessageResponseModelResponse'
 components:
   schemas:
+    CreateMaintenanceResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+            maintenanceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    MaintenanceListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            resolvedMaintenanceCount:
+              type: integer
+            openMaintenanceCount:
+              type: integer
+            newMaintenanceCount:
+              type: integer
+            totalRequestCount:
+              type: integer
+            maintenances:
+              type: array
+              items:
+                $ref: '#/components/schemas/MaintenanceTicketModel'
+            isMaintenanceRequestOn:
+              type: boolean
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     PagingModel:
       type: object
       properties:
@@ -141,16 +188,60 @@ components:
           type: integer
         totalRecords:
           type: integer
-    MessageResponseModelResponse:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    MaintenanceTicketModel:
+      type: object
+      properties:
+        maintenanceUid:
+          type: string
+          format: uuid
+        personName:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        dateSubmitted:
+          type: string
+          format: date-time
+        dateResolved:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isUrgent:
+          type: boolean
+        property:
+          type: string
+        unit:
+          type: string
+        propertyAddress:
+          type: string
+        personUid:
+          type: string
+          format: uuid
+        requestStatus:
+          type: string
+    FileModel:
+      type: object
+      properties:
+        fileName:
+          type: string
+        fileContent:
+          type: string
+          format: byte
     MaintenanceRequestModel:
       type: object
       required:
@@ -207,97 +298,6 @@ components:
           items:
             $ref: '#/components/schemas/FileModel'
           description: Attachments, max 10 files, 20MB each
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    MaintenanceListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            resolvedMaintenanceCount:
-              type: integer
-            openMaintenanceCount:
-              type: integer
-            newMaintenanceCount:
-              type: integer
-            totalRequestCount:
-              type: integer
-            maintenances:
-              type: array
-              items:
-                $ref: '#/components/schemas/MaintenanceTicketModel'
-            isMaintenanceRequestOn:
-              type: boolean
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    FileModel:
-      type: object
-      properties:
-        fileName:
-          type: string
-        fileContent:
-          type: string
-          format: byte
-    CreateMaintenanceResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-            maintenanceUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    MaintenanceTicketModel:
-      type: object
-      properties:
-        maintenanceUid:
-          type: string
-          format: uuid
-        personName:
-          type: string
-        name:
-          type: string
-        category:
-          type: string
-        description:
-          type: string
-        dateSubmitted:
-          type: string
-          format: date-time
-        dateResolved:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        isUrgent:
-          type: boolean
-        property:
-          type: string
-        unit:
-          type: string
-        propertyAddress:
-          type: string
-        personUid:
-          type: string
-          format: uuid
-        requestStatus:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

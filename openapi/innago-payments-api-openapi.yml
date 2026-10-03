@@ -116,86 +116,6 @@ paths:
                 $ref: '#/components/schemas/PaymentInfoResponseModelResponse'
 components:
   schemas:
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
-    PaymentInfoModel:
-      type: object
-      properties:
-        paymentUid:
-          type: string
-          format: uuid
-        paymentDate:
-          type: string
-          format: date-time
-        paymentMode:
-          type: string
-          description: online, offline
-        paymentStatus:
-          type: string
-          description: Pending, Paid, Rejected, Reversed
-        paymentCategory:
-          type: string
-          description: Invoice, Applicant, Reversal
-        amount:
-          type: number
-          format: double
-        payerId:
-          type: string
-          format: uuid
-        entityType:
-          type: string
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    PaymentWithAdditionalInfoListResponseResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            paymentWithAdditionalInfoResponses:
-              type: array
-              items:
-                $ref: '#/components/schemas/PaymentWithAdditionalInfoResponse'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    PaymentInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PaymentInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    RecordPaymentResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            paymentUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     PaymentWithAdditionalInfoResponse:
       type: object
       properties:
@@ -230,6 +150,46 @@ components:
         leaseUid:
           type: string
           format: uuid
+    PaymentWithAdditionalInfoListResponseResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            paymentWithAdditionalInfoResponses:
+              type: array
+              items:
+                $ref: '#/components/schemas/PaymentWithAdditionalInfoResponse'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PaymentInfoModel:
+      type: object
+      properties:
+        paymentUid:
+          type: string
+          format: uuid
+        paymentDate:
+          type: string
+          format: date-time
+        paymentMode:
+          type: string
+          description: online, offline
+        paymentStatus:
+          type: string
+          description: Pending, Paid, Rejected, Reversed
+        paymentCategory:
+          type: string
+          description: Invoice, Applicant, Reversal
+        amount:
+          type: number
+          format: double
+        payerId:
+          type: string
+          format: uuid
+        entityType:
+          type: string
     PaymentTransactionModel:
       type: object
       properties:
@@ -252,6 +212,46 @@ components:
           type: string
         paymentStatus:
           type: string
+    RecordPaymentResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            paymentUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    PaymentInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     RecordPaymentRequestModel:
       type: object
       required:

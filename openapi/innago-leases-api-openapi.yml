@@ -71,17 +71,32 @@ paths:
                 $ref: '#/components/schemas/FinalLeaseDetailModelResponse'
 components:
   schemas:
-    PagingModel:
+    LeaseListResponseModelResponse:
       type: object
       properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
+        data:
+          type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaseModel'
+            paging:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    FinalLeaseDetailModelResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/LeaseModel'
+          - type: object
+            properties:
+              listingFrequency:
+                type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     TenantShortModel:
       type: object
       properties:
@@ -96,18 +111,17 @@ components:
           type: string
         phone:
           type: string
-    FinalLeaseDetailModelResponse:
+    PagingModel:
       type: object
       properties:
-        data:
-          allOf:
-          - $ref: '#/components/schemas/LeaseModel'
-          - type: object
-            properties:
-              listingFrequency:
-                type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
     ErrorResponse:
       type: object
       properties:
@@ -163,20 +177,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TenantShortModel'
-    LeaseListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            list:
-              type: array
-              items:
-                $ref: '#/components/schemas/LeaseModel'
-            paging:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

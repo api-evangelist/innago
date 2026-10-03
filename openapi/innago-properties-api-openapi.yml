@@ -111,17 +111,29 @@ paths:
                 $ref: '#/components/schemas/PropertyUnitDetailResponseModelResponse'
 components:
   schemas:
-    PagingModel:
+    PropertyInfoResponseModelResponse:
       type: object
       properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
+        data:
+          $ref: '#/components/schemas/PropertyInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyUnitDetailResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            unit:
+              $ref: '#/components/schemas/PropertyUnitModel'
+            tenants:
+              type: array
+              items:
+                $ref: '#/components/schemas/TenantShortModel'
+            entityType:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     AddressResponseModel:
       type: object
       properties:
@@ -145,34 +157,6 @@ components:
         longitude:
           type: number
           format: double
-    PropertyUnitDetailResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            unit:
-              $ref: '#/components/schemas/PropertyUnitModel'
-            tenants:
-              type: array
-              items:
-                $ref: '#/components/schemas/TenantShortModel'
-            entityType:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    PropertyUnitListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            units:
-              type: array
-              items:
-                $ref: '#/components/schemas/PropertyUnitModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     TenantShortModel:
       type: object
       properties:
@@ -187,11 +171,37 @@ components:
           type: string
         phone:
           type: string
-    PropertyInfoResponseModelResponse:
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    PropertyUnitModel:
+      type: object
+      properties:
+        name:
+          type: string
+        propertyUnitUid:
+          type: string
+          format: uuid
+    PropertyInfoListResponseModelResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/PropertyInfoModel'
+          type: object
+          properties:
+            properties:
+              type: array
+              items:
+                $ref: '#/components/schemas/PropertyInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
     ErrorResponse:
@@ -234,28 +244,18 @@ components:
         propertyOwnerUid:
           type: string
           format: uuid
-    PropertyInfoListResponseModelResponse:
+    PropertyUnitListResponseModelResponse:
       type: object
       properties:
         data:
           type: object
           properties:
-            properties:
+            units:
               type: array
               items:
-                $ref: '#/components/schemas/PropertyInfoModel'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
+                $ref: '#/components/schemas/PropertyUnitModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    PropertyUnitModel:
-      type: object
-      properties:
-        name:
-          type: string
-        propertyUnitUid:
-          type: string
-          format: uuid
   securitySchemes:
     BearerAuth:
       type: http
