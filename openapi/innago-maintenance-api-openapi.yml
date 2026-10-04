@@ -153,41 +153,6 @@ components:
               type: string
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    MaintenanceListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            resolvedMaintenanceCount:
-              type: integer
-            openMaintenanceCount:
-              type: integer
-            newMaintenanceCount:
-              type: integer
-            totalRequestCount:
-              type: integer
-            maintenances:
-              type: array
-              items:
-                $ref: '#/components/schemas/MaintenanceTicketModel'
-            isMaintenanceRequestOn:
-              type: boolean
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
     ErrorResponse:
       type: object
       properties:
@@ -234,14 +199,41 @@ components:
           format: uuid
         requestStatus:
           type: string
-    FileModel:
+    PagingModel:
       type: object
       properties:
-        fileName:
-          type: string
-        fileContent:
-          type: string
-          format: byte
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    MaintenanceListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            resolvedMaintenanceCount:
+              type: integer
+            openMaintenanceCount:
+              type: integer
+            newMaintenanceCount:
+              type: integer
+            totalRequestCount:
+              type: integer
+            maintenances:
+              type: array
+              items:
+                $ref: '#/components/schemas/MaintenanceTicketModel'
+            isMaintenanceRequestOn:
+              type: boolean
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     MaintenanceRequestModel:
       type: object
       required:
@@ -298,6 +290,14 @@ components:
           items:
             $ref: '#/components/schemas/FileModel'
           description: Attachments, max 10 files, 20MB each
+    FileModel:
+      type: object
+      properties:
+        fileName:
+          type: string
+        fileContent:
+          type: string
+          format: byte
   securitySchemes:
     BearerAuth:
       type: http

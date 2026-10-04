@@ -95,6 +95,13 @@ components:
           - string
           - 'null'
           description: Property, PropertyUnit, Lease, Tenant, Invoice, Payment, Maintenance, or Applicant
+    UserShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     ErrorResponse:
       type: object
       properties:
@@ -106,13 +113,6 @@ components:
           type:
           - string
           - 'null'
-    UserShortInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/UserShortInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     UserShortInfoListResponseResponse:
       type: object
       properties:

@@ -40,6 +40,33 @@ paths:
                 $ref: '#/components/schemas/ExpenseListResponseModelResponse'
 components:
   schemas:
+    ExpenseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            expenseListModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExpenseShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+            totalRecords:
+              type: integer
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
     ExpenseShortInfoModel:
       type: object
       properties:
@@ -77,6 +104,17 @@ components:
         propertyUnitUid:
           type: string
           format: uuid
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
     GetAllExpensesByFilterRequestModel:
       type: object
       properties:
@@ -104,44 +142,6 @@ components:
           items:
             type: string
             format: uuid
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
-    ExpenseListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            expenseListModel:
-              type: array
-              items:
-                $ref: '#/components/schemas/ExpenseShortInfoModel'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-            totalRecords:
-              type: integer
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     BearerAuth:
       type: http

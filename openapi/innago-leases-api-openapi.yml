@@ -71,68 +71,6 @@ paths:
                 $ref: '#/components/schemas/FinalLeaseDetailModelResponse'
 components:
   schemas:
-    LeaseListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            list:
-              type: array
-              items:
-                $ref: '#/components/schemas/LeaseModel'
-            paging:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    FinalLeaseDetailModelResponse:
-      type: object
-      properties:
-        data:
-          allOf:
-          - $ref: '#/components/schemas/LeaseModel'
-          - type: object
-            properties:
-              listingFrequency:
-                type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    TenantShortModel:
-      type: object
-      properties:
-        tenantUid:
-          type: string
-          format: uuid
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
     LeaseModel:
       type: object
       properties:
@@ -177,6 +115,68 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TenantShortModel'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    LeaseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            list:
+              type: array
+              items:
+                $ref: '#/components/schemas/LeaseModel'
+            paging:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    FinalLeaseDetailModelResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/LeaseModel'
+          - type: object
+            properties:
+              listingFrequency:
+                type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    TenantShortModel:
+      type: object
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

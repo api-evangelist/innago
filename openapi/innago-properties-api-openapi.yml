@@ -111,29 +111,17 @@ paths:
                 $ref: '#/components/schemas/PropertyUnitDetailResponseModelResponse'
 components:
   schemas:
-    PropertyInfoResponseModelResponse:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/PropertyInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    PropertyUnitDetailResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            unit:
-              $ref: '#/components/schemas/PropertyUnitModel'
-            tenants:
-              type: array
-              items:
-                $ref: '#/components/schemas/TenantShortModel'
-            entityType:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
     AddressResponseModel:
       type: object
       properties:
@@ -157,20 +145,6 @@ components:
         longitude:
           type: number
           format: double
-    TenantShortModel:
-      type: object
-      properties:
-        tenantUid:
-          type: string
-          format: uuid
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
     PagingModel:
       type: object
       properties:
@@ -182,14 +156,6 @@ components:
           type: integer
         totalRecords:
           type: integer
-    PropertyUnitModel:
-      type: object
-      properties:
-        name:
-          type: string
-        propertyUnitUid:
-          type: string
-          format: uuid
     PropertyInfoListResponseModelResponse:
       type: object
       properties:
@@ -204,17 +170,51 @@ components:
               $ref: '#/components/schemas/PagingModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
+    PropertyInfoResponseModelResponse:
       type: object
       properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
+        data:
+          $ref: '#/components/schemas/PropertyInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyUnitDetailResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            unit:
+              $ref: '#/components/schemas/PropertyUnitModel'
+            tenants:
+              type: array
+              items:
+                $ref: '#/components/schemas/TenantShortModel'
+            entityType:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PropertyUnitModel:
+      type: object
+      properties:
+        name:
+          type: string
+        propertyUnitUid:
+          type: string
+          format: uuid
+    TenantShortModel:
+      type: object
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
     PropertyInfoModel:
       type: object
       properties:

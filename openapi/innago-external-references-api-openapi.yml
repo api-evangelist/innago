@@ -68,6 +68,27 @@ paths:
                 $ref: '#/components/schemas/MessageResponseModelResponse'
 components:
   schemas:
+    MessageResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
     ExternalReferenceMappingRequest:
       type: array
       items:
@@ -82,6 +103,17 @@ components:
           externalReferenceId:
             type: string
             format: uuid
+    RecordReferencePaymentRequestModel:
+      type: object
+      properties:
+        externalTenantGuid:
+          type: string
+          format: uuid
+          description: External Id of Tenant
+        amount:
+          type: number
+          format: double
+          description: Amount Paid
     ExternalReferenceMappingResponse:
       type: object
       properties:
@@ -107,38 +139,6 @@ components:
                     type: string
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    MessageResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    RecordReferencePaymentRequestModel:
-      type: object
-      properties:
-        externalTenantGuid:
-          type: string
-          format: uuid
-          description: External Id of Tenant
-        amount:
-          type: number
-          format: double
-          description: Amount Paid
   securitySchemes:
     BearerAuth:
       type: http

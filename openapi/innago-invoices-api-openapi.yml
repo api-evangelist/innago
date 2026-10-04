@@ -93,24 +93,6 @@ paths:
                 $ref: '#/components/schemas/InvoiceShortInfoResponseModelResponse'
 components:
   schemas:
-    InvoiceShortInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/InvoiceShortInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    CreateInvoiceResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            invoiceUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     InvoiceShortInfoModel:
       type: object
       properties:
@@ -131,17 +113,6 @@ components:
           format: double
         entityType:
           type: string
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
     ErrorResponse:
       type: object
       properties:
@@ -153,18 +124,33 @@ components:
           type:
           - string
           - 'null'
-    InvoiceShortInfoListResponseModelResponse:
+    CreateInvoiceResponseModelResponse:
       type: object
       properties:
         data:
           type: object
           properties:
-            invoiceShortInfoResponseModel:
-              type: array
-              items:
-                $ref: '#/components/schemas/InvoiceShortInfoModel'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
+            invoiceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    InvoiceShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InvoiceShortInfoModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
     CreateInvoiceModel:
@@ -189,6 +175,20 @@ components:
         dueDate:
           type: string
           format: date-time
+    InvoiceShortInfoListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            invoiceShortInfoResponseModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/InvoiceShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http
