@@ -111,110 +111,6 @@ paths:
                 $ref: '#/components/schemas/PropertyUnitDetailResponseModelResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    AddressResponseModel:
-      type: object
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        country:
-          type: string
-        state:
-          type: string
-        stateShortName:
-          type: string
-        city:
-          type: string
-        zipcode:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-    PagingModel:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-        currentPage:
-          type: integer
-        pageCount:
-          type: integer
-        totalRecords:
-          type: integer
-    PropertyInfoListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            properties:
-              type: array
-              items:
-                $ref: '#/components/schemas/PropertyInfoModel'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    PropertyInfoResponseModelResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PropertyInfoModel'
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    PropertyUnitDetailResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            unit:
-              $ref: '#/components/schemas/PropertyUnitModel'
-            tenants:
-              type: array
-              items:
-                $ref: '#/components/schemas/TenantShortModel'
-            entityType:
-              type: string
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    PropertyUnitModel:
-      type: object
-      properties:
-        name:
-          type: string
-        propertyUnitUid:
-          type: string
-          format: uuid
-    TenantShortModel:
-      type: object
-      properties:
-        tenantUid:
-          type: string
-          format: uuid
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
     PropertyInfoModel:
       type: object
       properties:
@@ -244,6 +140,51 @@ components:
         propertyOwnerUid:
           type: string
           format: uuid
+    PropertyInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PropertyInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    PagingModel:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+        currentPage:
+          type: integer
+        pageCount:
+          type: integer
+        totalRecords:
+          type: integer
+    PropertyUnitDetailResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            unit:
+              $ref: '#/components/schemas/PropertyUnitModel'
+            tenants:
+              type: array
+              items:
+                $ref: '#/components/schemas/TenantShortModel'
+            entityType:
+              type: string
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
     PropertyUnitListResponseModelResponse:
       type: object
       properties:
@@ -256,6 +197,65 @@ components:
                 $ref: '#/components/schemas/PropertyUnitModel'
         error:
           $ref: '#/components/schemas/ErrorResponse'
+    TenantShortModel:
+      type: object
+      properties:
+        tenantUid:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    PropertyUnitModel:
+      type: object
+      properties:
+        name:
+          type: string
+        propertyUnitUid:
+          type: string
+          format: uuid
+    PropertyInfoListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            properties:
+              type: array
+              items:
+                $ref: '#/components/schemas/PropertyInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
+    AddressResponseModel:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        stateShortName:
+          type: string
+        city:
+          type: string
+        zipcode:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
   securitySchemes:
     BearerAuth:
       type: http

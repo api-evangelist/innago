@@ -130,19 +130,6 @@ paths:
                 $ref: '#/components/schemas/MessageResponseModelResponse'
 components:
   schemas:
-    CreateMaintenanceResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            message:
-              type: string
-            maintenanceUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     MessageResponseModelResponse:
       type: object
       properties:
@@ -153,17 +140,6 @@ components:
               type: string
         error:
           $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
     MaintenanceTicketModel:
       type: object
       properties:
@@ -210,6 +186,25 @@ components:
           type: integer
         totalRecords:
           type: integer
+    FileModel:
+      type: object
+      properties:
+        fileName:
+          type: string
+        fileContent:
+          type: string
+          format: byte
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
     MaintenanceListResponseModelResponse:
       type: object
       properties:
@@ -290,14 +285,19 @@ components:
           items:
             $ref: '#/components/schemas/FileModel'
           description: Attachments, max 10 files, 20MB each
-    FileModel:
+    CreateMaintenanceResponseModelResponse:
       type: object
       properties:
-        fileName:
-          type: string
-        fileContent:
-          type: string
-          format: byte
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+            maintenanceUid:
+              type: string
+              format: uuid
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

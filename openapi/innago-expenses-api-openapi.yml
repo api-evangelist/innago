@@ -40,33 +40,6 @@ paths:
                 $ref: '#/components/schemas/ExpenseListResponseModelResponse'
 components:
   schemas:
-    ExpenseListResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            expenseListModel:
-              type: array
-              items:
-                $ref: '#/components/schemas/ExpenseShortInfoModel'
-            pagingModel:
-              $ref: '#/components/schemas/PagingModel'
-            totalRecords:
-              type: integer
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
     ExpenseShortInfoModel:
       type: object
       properties:
@@ -104,6 +77,22 @@ components:
         propertyUnitUid:
           type: string
           format: uuid
+    ExpenseListResponseModelResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            expenseListModel:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExpenseShortInfoModel'
+            pagingModel:
+              $ref: '#/components/schemas/PagingModel'
+            totalRecords:
+              type: integer
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     PagingModel:
       type: object
       properties:
@@ -115,6 +104,17 @@ components:
           type: integer
         totalRecords:
           type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
     GetAllExpensesByFilterRequestModel:
       type: object
       properties:

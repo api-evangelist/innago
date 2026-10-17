@@ -113,28 +113,6 @@ components:
           format: double
         entityType:
           type: string
-    ErrorResponse:
-      type: object
-      properties:
-        errorMessage:
-          type:
-          - string
-          - 'null'
-        errorCode:
-          type:
-          - string
-          - 'null'
-    CreateInvoiceResponseModelResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            invoiceUid:
-              type: string
-              format: uuid
-        error:
-          $ref: '#/components/schemas/ErrorResponse'
     PagingModel:
       type: object
       properties:
@@ -146,11 +124,15 @@ components:
           type: integer
         totalRecords:
           type: integer
-    InvoiceShortInfoResponseModelResponse:
+    CreateInvoiceResponseModelResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/InvoiceShortInfoModel'
+          type: object
+          properties:
+            invoiceUid:
+              type: string
+              format: uuid
         error:
           $ref: '#/components/schemas/ErrorResponse'
     CreateInvoiceModel:
@@ -175,6 +157,24 @@ components:
         dueDate:
           type: string
           format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type:
+          - string
+          - 'null'
+        errorCode:
+          type:
+          - string
+          - 'null'
+    InvoiceShortInfoResponseModelResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/InvoiceShortInfoModel'
+        error:
+          $ref: '#/components/schemas/ErrorResponse'
     InvoiceShortInfoListResponseModelResponse:
       type: object
       properties:
